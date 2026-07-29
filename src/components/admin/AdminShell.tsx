@@ -7,7 +7,6 @@ import {
   FileText,
   ShoppingBag,
   Images,
-  HelpCircle,
   ClipboardList,
   LogOut,
   ExternalLink,
@@ -19,7 +18,6 @@ const nav = [
   { href: "/admin/pages", label: "Pages", icon: FileText },
   { href: "/admin/products", label: "Products", icon: ShoppingBag },
   { href: "/admin/gallery", label: "Gallery", icon: Images },
-  { href: "/admin/faqs", label: "FAQs", icon: HelpCircle },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList },
 ];
 
@@ -59,7 +57,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 className={`flex items-center gap-2 whitespace-nowrap px-3 py-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] transition sm:text-xs sm:tracking-[0.12em] ${
                   active
-                    ? "bg-[rgba(184,255,46,0.1)] text-[var(--neon)]"
+                    ? "bg-[rgba(0,180,255,0.12)] text-[var(--neon)]"
                     : "text-[var(--muted)] hover:text-white"
                 }`}
               >

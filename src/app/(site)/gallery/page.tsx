@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { getGallery, getPage } from "@/lib/data";
 
-export const metadata = { title: "Gallery" };
+export const metadata: Metadata = {
+  title: "Gallery | Elite Body Fitness Pros",
+  description:
+    "Explore the energy, focus, and transformation happening at Elite Body Fitness Pros.",
+};
 
 export default async function GalleryPage() {
   const page = await getPage("gallery");
@@ -14,7 +19,7 @@ export default async function GalleryPage() {
     <>
       <PageHero
         eyebrow={hero?.subtitle}
-        title={hero?.title || "The Grind. The Glow."}
+        title={hero?.title || "Inside Elite Body Fitness Pros"}
         body={hero?.body}
         image={hero?.image}
       />

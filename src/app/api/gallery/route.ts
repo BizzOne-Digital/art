@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { isAuthenticated } from "@/lib/auth";
-import { getGallery, updateSiteData } from "@/lib/data";
+import {
+  createGalleryItem,
+  deleteGalleryItem,
+  getGallery,
+  updateGalleryItem,
+} from "@/lib/data";
 import type { GalleryItem } from "@/lib/types";
 
 export async function GET() {
@@ -21,12 +26,8 @@ export async function POST(req: NextRequest) {
     image: body.image || "",
   };
 
-  await updateSiteData((data) => {
-    data.gallery.push(item);
-    return data;
-  });
-
-  return NextResponse.json(item, { status: 201 });
+  const created = await createGalleryItem(item);
+  return NextResponse.json(created, { status: 201 });
 }
 
 export async function PUT(req: NextRequest) {
@@ -35,13 +36,8 @@ export async function PUT(req: NextRequest) {
   }
 
   const item = (await req.json()) as GalleryItem;
-  await updateSiteData((data) => {
-    const idx = data.gallery.findIndex((g) => g.id === item.id);
-    if (idx !== -1) data.gallery[idx] = item;
-    return data;
-  });
-
-  return NextResponse.json(item);
+  const updated = await updateGalleryItem(item);
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(req: NextRequest) {
@@ -50,10 +46,6 @@ export async function DELETE(req: NextRequest) {
   }
 
   const { id } = await req.json();
-  await updateSiteData((data) => {
-    data.gallery = data.gallery.filter((g) => g.id !== id);
-    return data;
-  });
-
+  await deleteGalleryItem(id);
   return NextResponse.json({ ok: true });
 }

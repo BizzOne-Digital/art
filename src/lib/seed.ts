@@ -7,7 +7,15 @@ export const seedData: SiteData = {
     phone: "19162233228",
     headline: "Unleash The Strongest Version of You",
     tagline:
-      "Delivering personalized, science-based training that fits your schedule and transforms your results.",
+      "At Elite Body Fitness Pros, we deliver personalized, science-based training that fits your schedule and transforms your results.",
+    disclaimer:
+      "Consult your physician before beginning this or any exercise program. This information is not intended as a substitute for medical advice. Use of information provided on this site is solely at your own risk.",
+    heroExternalUrl: "http://www.powerfulteees.etsy.com/",
+    heroExternalLabel: "Visit Our Shop",
+    musicUrl:
+      "https://open.spotify.com/track/2siqSsVoviIIkwb9D4A9wj",
+    videoUrl:
+      "https://assets.mixkit.co/videos/preview/mixkit-man-training-in-a-gym-40941-large.mp4",
   },
   pages: [
     {
@@ -19,55 +27,55 @@ export const seedData: SiteData = {
           key: "hero",
           title: "Unleash The Strongest Version of You",
           subtitle: "Elite Body Fitness Pros",
-          body: "Delivering personalized, science-based training that fits your schedule and transforms your results.",
+          body: "At Elite Body Fitness Pros, we deliver personalized, science-based training that fits your schedule and transforms your results.",
           image:
             "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80",
-          ctaText: "Start Training",
-          ctaLink: "/booking",
+          ctaText: "Explore Packages",
+          ctaLink: "/packages",
         },
         {
           id: "home-about",
           key: "about-preview",
           title: "Built For Real Results",
-          subtitle: "Who We Are",
-          body: "We craft elite training experiences grounded in science, discipline, and personalization. Every program is designed around your schedule, goals, and lifestyle.",
+          subtitle: "At Elite Body Fitness Pros",
+          body: "At Elite Body Fitness Pros, we craft training experiences grounded in science, discipline, and personalization. Every program is designed around your schedule, goals, and lifestyle.",
           image:
             "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80",
         },
         {
           id: "home-services",
           key: "services-preview",
-          title: "Training That Transforms",
-          subtitle: "Our Services",
-          body: "From one-on-one coaching to performance programming — choose the path that unlocks your strongest self.",
+          title: "What You Get With Elite Body Fitness Pros",
+          subtitle: "Our Packages",
+          body: "What you get with Elite Body Fitness Pros is coaching built for real results — choose the package that fits your goals and lifestyle.",
           image:
             "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80",
         },
         {
           id: "home-why",
           key: "why-us",
-          title: "Strength With Purpose",
-          subtitle: "Why Elite Body",
-          body: "Dark, focused, and results-driven coaching designed to transform how you train, recover, and perform.",
+          title: "Why Train With Elite Body Fitness Pros",
+          subtitle: "Why Choose Us",
+          body: "Focused, and results-driven programs designed to transform how you train, recover, and perform.",
           image:
             "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80",
         },
         {
           id: "home-method",
           key: "method",
-          title: "From First Session To Full Transformation",
+          title: "How Elite Body Fitness Pros Transforms You",
           subtitle: "The Process",
-          body: "A clear path designed for momentum — consult, program, train, and transform with elite coaching at every step.",
+          body: "At Elite Body Fitness Pros, we follow a clear path designed for momentum — program, train, and transform with coaching at every step.",
           image:
             "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
         },
         {
           id: "home-cta",
           key: "cta",
-          title: "Ready To Level Up?",
-          body: "Book a session and start building the strongest version of you.",
-          ctaText: "Book Now",
-          ctaLink: "/booking",
+          title: "Ready To Train With Elite Body Fitness Pros?",
+          body: "Contact Elite Body Fitness Pros today and start building the strongest version of you.",
+          ctaText: "Contact Us",
+          ctaLink: "/contact",
           image:
             "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1200&q=80",
         },
@@ -80,9 +88,9 @@ export const seedData: SiteData = {
         {
           id: "about-hero",
           key: "hero",
-          title: "Science. Discipline. Results.",
-          subtitle: "About Elite Body Fitness Pros",
-          body: "Delivering personalized, science-based training that fits your schedule and transforms your results.",
+          title: "About Elite Body Fitness Pros",
+          subtitle: "Our Story",
+          body: "At Elite Body Fitness Pros, we help clients unleash their strongest selves through personalized, science-based training. Full About details can be updated anytime.",
           image:
             "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1600&q=80",
         },
@@ -90,32 +98,48 @@ export const seedData: SiteData = {
           id: "about-mission",
           key: "mission",
           title: "Our Mission",
-          body: "To empower every client with elite coaching, proven methods, and unwavering accountability — so you can unleash the strongest version of yourself.",
+          subtitle: "Mission Statement",
+          body: "We believe fitness should fit your life — not the other way around. That's why we built Elite Body Fitness Pros, a choice of fitness apps designed to meet you wherever you are, whether that's a packed gym, a quiet living room, or the middle of a busy travel schedule.\n\nWe're not here to sell you a one-size-fits-all program. We're here to give you tools that adapt — smart tracking, personalized plans, and real support — so consistency feels achievable, not exhausting. So you can “Unleash the strongest version of you”.",
           image:
             "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
         },
         {
           id: "about-approach",
           key: "approach",
-          title: "Our Approach",
-          body: "We blend biomechanics, progressive overload, recovery science, and lifestyle coaching into programs that fit real schedules — not fantasies.",
+          title: "What Elite Body Fitness Pros Stands For",
+          body: "What you get with Elite Body Fitness Pros is a blend of biomechanics, progressive overload, recovery science, and lifestyle coaching that fits real schedules.",
           image:
             "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80",
         },
       ],
     },
     {
-      slug: "services",
-      name: "Services",
+      slug: "packages",
+      name: "Packages",
       sections: [
         {
-          id: "services-hero",
+          id: "packages-hero",
           key: "hero",
-          title: "Elite Training Services",
-          subtitle: "What We Offer",
-          body: "Personalized coaching designed to transform your body, mindset, and performance.",
+          title: "Packages At Elite Body Fitness Pros",
+          subtitle: "What You Get With Elite Body Fitness Pros",
+          body: "What you get with Elite Body Fitness Pros is flexible coaching packages built for your goals, schedule, and performance level.",
           image:
             "https://images.unsplash.com/photo-1517963879433-6ad2b056d944?w=1600&q=80",
+        },
+      ],
+    },
+    {
+      slug: "programs",
+      name: "Training Programs",
+      sections: [
+        {
+          id: "programs-hero",
+          key: "hero",
+          title: "Training Programs At Elite Body Fitness Pros",
+          subtitle: "Programs",
+          body: "At Elite Body Fitness Pros, our training programs are designed to build strength, improve performance, and create lasting habits.",
+          image:
+            "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1600&q=80",
         },
       ],
     },
@@ -126,9 +150,9 @@ export const seedData: SiteData = {
         {
           id: "contact-hero",
           key: "hero",
-          title: "Let's Build Your Strongest Self",
+          title: "Contact Elite Body Fitness Pros",
           subtitle: "Get In Touch",
-          body: "Questions about training, products, or booking? Reach out — we respond fast.",
+          body: "Have questions about Elite Body Fitness Pros apps, packages, or shop products? Reach out — we respond fast.",
           image:
             "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1600&q=80",
         },
@@ -141,9 +165,9 @@ export const seedData: SiteData = {
         {
           id: "gallery-hero",
           key: "hero",
-          title: "The Grind. The Glow.",
+          title: "Inside Elite Body Fitness Pros",
           subtitle: "Gallery",
-          body: "Moments from the floor — intensity, focus, and transformation.",
+          body: "Explore the energy, focus, and transformation happening at Elite Body Fitness Pros — intensity, discipline, and real results.",
           image:
             "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=1600&q=80",
         },
@@ -156,9 +180,9 @@ export const seedData: SiteData = {
         {
           id: "pricing-hero",
           key: "hero",
-          title: "Invest In Your Strength",
-          subtitle: "Pricing",
-          body: "Transparent packages built for lasting results. Choose your intensity.",
+          title: "Pricing At Elite Body Fitness Pros",
+          subtitle: "Invest In Your Strength",
+          body: "See what you get with Elite Body Fitness Pros pricing options built for lasting results. Final rates can be confirmed with our team.",
           image:
             "https://images.unsplash.com/photo-1434682881908-b43d495dd23d?w=1600&q=80",
         },
@@ -171,41 +195,11 @@ export const seedData: SiteData = {
         {
           id: "shop-hero",
           key: "hero",
-          title: "Elite Gear & Essentials",
+          title: "Shop Elite Body Fitness Pros Gear",
           subtitle: "Shop",
-          body: "Premium products curated for performance. Inquire for pricing on every item.",
+          body: "Train with Elite Body Fitness Pros essentials curated for performance. Inquire for pricing on every item.",
           image:
             "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&q=80",
-        },
-      ],
-    },
-    {
-      slug: "booking",
-      name: "Booking",
-      sections: [
-        {
-          id: "booking-hero",
-          key: "hero",
-          title: "Book Your Session",
-          subtitle: "Start Training",
-          body: "Reserve your spot and take the first step toward the strongest version of you.",
-          image:
-            "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1600&q=80",
-        },
-      ],
-    },
-    {
-      slug: "faq",
-      name: "FAQ",
-      sections: [
-        {
-          id: "faq-hero",
-          key: "hero",
-          title: "Questions. Answered.",
-          subtitle: "FAQ",
-          body: "Everything you need to know before you start training with us.",
-          image:
-            "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1600&q=80",
         },
       ],
     },
@@ -216,9 +210,9 @@ export const seedData: SiteData = {
         {
           id: "testimonials-hero",
           key: "hero",
-          title: "Real Clients. Real Strength.",
+          title: "Designed App Results",
           subtitle: "Testimonials",
-          body: "Hear from people who transformed their bodies and mindset with Elite Body Fitness Pros.",
+          body: "Real stories from people using Elite Body Fitness Pros designed fitness apps — smarter tracking, personalized plans, and results that stick.",
           image:
             "https://images.unsplash.com/photo-1599058947525-85fbcf6e0a7f?w=1600&q=80",
         },
@@ -228,69 +222,42 @@ export const seedData: SiteData = {
   products: [
     {
       id: "prod-1",
-      name: "Elite Resistance Band Set",
+      name: "Apparel",
       description:
-        "Professional-grade resistance bands for warm-ups, mobility, and strength work at any level.",
-      category: "Equipment",
-      image:
-        "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&q=80",
-      featured: true,
-      active: true,
-    },
-    {
-      id: "prod-2",
-      name: "Performance Training Hoodie",
-      description:
-        "Sleek black training hoodie with neon accent stitching — built for the grind.",
+        "Training tees, hoodies, and performance wear from our Powerfulteees shop.",
       category: "Apparel",
       image:
         "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80",
       featured: true,
       active: true,
+      externalUrl: "http://www.powerfulteees.etsy.com/",
+      ctaLabel: "Visit Shop",
     },
     {
-      id: "prod-3",
-      name: "Elite Protein Shaker",
+      id: "prod-2",
+      name: "Accessories",
       description:
-        "Leak-proof, dual-compartment shaker designed for pre and post workout nutrition.",
+        "Fitness accessories and essentials available through our online shop.",
       category: "Accessories",
       image:
         "https://images.unsplash.com/photo-1579722820308-d74e57ce3e79?w=800&q=80",
-      featured: false,
-      active: true,
-    },
-    {
-      id: "prod-4",
-      name: "Grip Strength Trainer",
-      description:
-        "Adjustable grip trainer to build forearm power and improve lift stability.",
-      category: "Equipment",
-      image:
-        "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80",
-      featured: false,
-      active: true,
-    },
-    {
-      id: "prod-5",
-      name: "Recovery Foam Roller",
-      description:
-        "High-density foam roller for deep tissue recovery and mobility sessions.",
-      category: "Recovery",
-      image:
-        "https://images.unsplash.com/photo-1599901860904-17e6bd22081b?w=800&q=80",
       featured: true,
       active: true,
+      externalUrl: "http://www.powerfulteees.etsy.com/",
+      ctaLabel: "Visit Shop",
     },
     {
-      id: "prod-6",
-      name: "Elite Training Cap",
+      id: "prod-3",
+      name: "Resistance Bands",
       description:
-        "Minimal black performance cap with embroidered neon green mark.",
-      category: "Apparel",
+        "Professional-grade resistance bands for warm-ups, mobility, and strength work.",
+      category: "Equipment",
       image:
-        "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&q=80",
-      featured: false,
+        "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&q=80",
+      featured: true,
       active: true,
+      externalUrl: "",
+      ctaLabel: "Coming Soon!",
     },
   ],
   gallery: [
@@ -310,45 +277,24 @@ export const seedData: SiteData = {
     },
     {
       id: "gal-3",
-      title: "Form Check",
-      category: "Coaching",
-      image:
-        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1000&q=80",
-    },
-    {
-      id: "gal-4",
       title: "Strength Session",
       category: "Training",
       image:
         "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1000&q=80",
     },
     {
-      id: "gal-5",
+      id: "gal-4",
       title: "Mobility Work",
       category: "Recovery",
       image:
         "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1000&q=80",
     },
     {
-      id: "gal-6",
-      title: "Elite Atmosphere",
-      category: "Facility",
-      image:
-        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1000&q=80",
-    },
-    {
-      id: "gal-7",
+      id: "gal-5",
       title: "Pull Day",
       category: "Training",
       image:
         "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1000&q=80",
-    },
-    {
-      id: "gal-8",
-      title: "Team Energy",
-      category: "Community",
-      image:
-        "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1000&q=80",
     },
   ],
   faqs: [
@@ -360,76 +306,63 @@ export const seedData: SiteData = {
       order: 1,
     },
     {
-      id: "faq-2",
-      question: "How are training sessions scheduled?",
-      answer:
-        "Sessions are booked around your availability. Use our Booking page or contact us directly to lock in times that fit your week.",
-      order: 2,
-    },
-    {
       id: "faq-3",
       question: "Are product prices listed online?",
       answer:
         "Product pricing is available on request. Click Inquire for Price on any item and we'll get back to you quickly.",
-      order: 3,
+      order: 2,
     },
     {
       id: "faq-4",
       question: "What should I bring to my first session?",
       answer:
         "Comfortable training clothes, water, and a mindset ready to work. We'll handle the programming and coaching.",
-      order: 4,
-    },
-    {
-      id: "faq-5",
-      question: "Can I train online or hybrid?",
-      answer:
-        "Yes. We offer in-person, remote, and hybrid coaching so your training stays consistent no matter your schedule.",
-      order: 5,
+      order: 3,
     },
   ],
   pricing: [
     {
       id: "plan-1",
-      name: "Starter",
-      price: "$79",
-      period: "/month",
-      description: "Perfect for building consistent habits and foundational strength.",
+      name: "Starter Package",
+      price: "$99",
+      period: "",
+      description:
+        "Perfect for building consistent habits and foundational strength.",
       features: [
-        "2 sessions / week",
-        "Custom workout plan",
-        "Form coaching",
-        "Progress check-ins",
+        "Beginners program",
+        "Basic routine",
+        "Form and functional exercises",
+        "Start of journey!",
       ],
       highlighted: false,
     },
     {
       id: "plan-2",
-      name: "Premium",
-      price: "$149",
-      period: "/month",
+      name: "Elite Package",
+      price: "$199",
+      period: "",
       description: "Our most popular package for serious transformation.",
       features: [
-        "4 sessions / week",
-        "Fully personalized program",
-        "Nutrition guidance",
-        "Priority booking",
-        "Weekly progress reviews",
+        "Full training workouts",
+        "Intermediate clients who need structured programs",
+        "Goal specific training system",
+        "Form design program for max results",
       ],
       highlighted: true,
     },
     {
       id: "plan-3",
-      name: "Elite",
-      price: "$249",
-      period: "/month",
-      description: "Maximum coaching intensity for athletes and high performers.",
+      name: "Platinum Package",
+      price: "$299",
+      period: "",
+      description:
+        "Maximum coaching intensity for athletes and high performers.",
       features: [
-        "Unlimited sessions",
-        "1-on-1 elite coaching",
-        "Meal planning",
-        "Recovery protocols",
-        "24/7 coach access",
+        "Full workout programs for advanced results",
+        "Meal guidance",
+        "Zoom accountability calls",
+        "Weekly coach access",
+        "Free workout t-shirt for motivation",
       ],
       highlighted: false,
     },
@@ -437,57 +370,59 @@ export const seedData: SiteData = {
   services: [
     {
       id: "svc-1",
-      title: "Personal Training",
+      title: "Scientifically Designed Program Structure",
       description:
-        "One-on-one coaching calibrated to your goals, schedule, and performance markers.",
+        "Placeholder package — replace with the client's final package details.",
       image:
-        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&q=80",
-      icon: "dumbbell",
+        "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80",
+      icon: "layers",
     },
     {
       id: "svc-2",
       title: "Strength Programming",
       description:
-        "Periodized strength plans built on progressive overload and recovery science.",
+        "Placeholder package — replace with the client's final package details.",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
       icon: "zap",
     },
     {
       id: "svc-3",
-      title: "Nutrition Coaching",
+      title: "Nutritional Guidance",
       description:
-        "Practical fueling strategies that support fat loss, muscle gain, and energy.",
+        "Placeholder package — replace with the client's final package details.",
       image:
         "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
       icon: "apple",
     },
+  ],
+  programs: [
     {
-      id: "svc-4",
-      title: "Online Coaching",
+      id: "prog-1",
+      title: "Strength Foundations",
       description:
-        "Remote programming with video form checks and weekly accountability.",
+        "Placeholder training program — client will provide final details.",
       image:
-        "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80",
-      icon: "monitor",
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
+      level: "Beginner",
     },
     {
-      id: "svc-5",
-      title: "Group Sessions",
+      id: "prog-2",
+      title: "Athletic Performance",
       description:
-        "High-energy small group training that keeps intensity high and community strong.",
+        "Placeholder training program — client will provide final details.",
       image:
-        "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=900&q=80",
-      icon: "users",
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&q=80",
+      level: "Intermediate",
     },
     {
-      id: "svc-6",
-      title: "Mobility & Recovery",
+      id: "prog-3",
+      title: "Elite Transformation",
       description:
-        "Targeted mobility work and recovery protocols to keep you training pain-free.",
+        "Placeholder training program — client will provide final details.",
       image:
-        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80",
-      icon: "heart",
+        "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=900&q=80",
+      level: "Advanced",
     },
   ],
   orders: [],

@@ -9,29 +9,32 @@ export function Footer() {
         <div className="min-w-0">
           <Logo />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
-            Delivering personalized, science-based training that fits your
-            schedule and transforms your results.
+            At Elite Body Fitness Pros, we deliver personalized, science-based
+            training that fits your schedule and transforms your results.
           </p>
-          <div className="mt-5 h-1 w-24 bg-[linear-gradient(90deg,#b8ff2e,#3dffb5,#1ec8a5)]" />
+          <div className="mt-5 h-1 w-24 bg-[linear-gradient(90deg,#00b4ff,#ff6a00,#ffd200)]" />
         </div>
 
         <div>
           <h4 className="heading-md text-white">Explore</h4>
           <div className="mt-4 grid gap-2 text-sm text-[var(--muted)]">
-            <Link href="/services" className="hover:text-[var(--neon)]">
-              Services
+            <Link href="/packages" className="hover:text-[var(--neon)]">
+              Packages
             </Link>
-            <Link href="/shop" className="hover:text-[var(--neon)]">
-              Shop
+            <Link href="/programs" className="hover:text-[var(--neon)]">
+              Training Programs
             </Link>
             <Link href="/pricing" className="hover:text-[var(--neon)]">
               Pricing
             </Link>
+            <Link href="/shop" className="hover:text-[var(--neon)]">
+              Shop
+            </Link>
             <Link href="/gallery" className="hover:text-[var(--neon)]">
               Gallery
             </Link>
-            <Link href="/faq" className="hover:text-[var(--neon)]">
-              FAQ
+            <Link href="/about" className="hover:text-[var(--neon)]">
+              About
             </Link>
           </div>
         </div>

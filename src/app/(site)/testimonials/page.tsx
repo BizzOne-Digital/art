@@ -1,40 +1,45 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Reveal";
 import { getPage } from "@/lib/data";
 
-export const metadata = { title: "Testimonials" };
+export const metadata: Metadata = {
+  title: "Elite Body Fitness Pros App Results",
+  description:
+    "Real results from people using Elite Body Fitness Pros designed fitness apps — smarter tracking, personalized plans, and consistency that sticks.",
+};
 
 const testimonials = [
   {
     name: "Marcus R.",
-    role: "Athlete",
+    role: "App User · Athlete",
     quote:
-      "The programming is elite. I gained strength without burning out — and the coaching detail is unmatched.",
+      "The Elite Body Fitness Pros app kept my training locked in — smart tracking and clear progress so I finally stayed consistent.",
     image:
       "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&q=80",
   },
   {
     name: "Sofia L.",
-    role: "Entrepreneur",
+    role: "App User · Busy Professional",
     quote:
-      "Sessions fit my chaotic schedule and still delivered visible results in weeks. Dark, focused, professional energy.",
+      "I use the Elite Body Fitness Pros app on the road and at home. Personalized plans adapt to my schedule and the results showed up fast.",
     image:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
   },
   {
     name: "Jordan K.",
-    role: "Former Beginner",
+    role: "App User · Beginner",
     quote:
-      "I walked in nervous. Now I train with confidence. Science-based plans, real accountability, zero fluff.",
+      "From guessing workouts to following a designed program in the app — Elite Body Fitness Pros made progress feel simple and measurable.",
     image:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
   },
   {
     name: "Ava M.",
-    role: "Hybrid Athlete",
+    role: "App User · Hybrid Training",
     quote:
-      "Premium coaching that actually transforms. The strongest version of me finally showed up.",
+      "What you get with the Elite Body Fitness Pros app is real support built into the plan. My strongest version showed up in the results.",
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
   },
@@ -47,9 +52,12 @@ export default async function TestimonialsPage() {
   return (
     <>
       <PageHero
-        eyebrow={hero?.subtitle}
-        title={hero?.title || "Real Clients. Real Strength."}
-        body={hero?.body}
+        eyebrow={hero?.subtitle || "App Results"}
+        title={hero?.title || "Designed App Results"}
+        body={
+          hero?.body ||
+          "Real stories from people using Elite Body Fitness Pros designed fitness apps — smarter tracking, personalized plans, and results that stick."
+        }
         image={hero?.image}
       />
 
@@ -65,7 +73,7 @@ export default async function TestimonialsPage() {
                   <div className="relative mx-auto h-20 w-20 shrink-0 overflow-hidden sm:mx-0">
                     <Image
                       src={t.image}
-                      alt={t.name}
+                      alt={`${t.name} — Elite Body Fitness Pros app results`}
                       fill
                       className="object-cover"
                       sizes="80px"

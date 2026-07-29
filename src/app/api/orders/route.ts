@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { isAuthenticated } from "@/lib/auth";
-import { getOrders, updateSiteData } from "@/lib/data";
+import {
+  createOrder,
+  deleteOrder,
+  getOrders,
+  updateOrderStatus,
+} from "@/lib/data";
 import type { Order } from "@/lib/types";
 
 export async function GET() {
@@ -28,12 +33,8 @@ export async function POST(req: NextRequest) {
     createdAt: new Date().toISOString(),
   };
 
-  await updateSiteData((data) => {
-    data.orders.unshift(order);
-    return data;
-  });
-
-  return NextResponse.json(order, { status: 201 });
+  const created = await createOrder(order);
+  return NextResponse.json(created, { status: 201 });
 }
 
 export async function PUT(req: NextRequest) {
@@ -42,12 +43,7 @@ export async function PUT(req: NextRequest) {
   }
 
   const { id, status } = await req.json();
-  await updateSiteData((data) => {
-    const idx = data.orders.findIndex((o) => o.id === id);
-    if (idx !== -1) data.orders[idx].status = status;
-    return data;
-  });
-
+  await updateOrderStatus(id, status);
   return NextResponse.json({ ok: true });
 }
 
@@ -57,10 +53,6 @@ export async function DELETE(req: NextRequest) {
   }
 
   const { id } = await req.json();
-  await updateSiteData((data) => {
-    data.orders = data.orders.filter((o) => o.id !== id);
-    return data;
-  });
-
+  await deleteOrder(id);
   return NextResponse.json({ ok: true });
 }

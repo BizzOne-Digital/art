@@ -23,6 +23,8 @@ export type Product = {
   image: string;
   featured: boolean;
   active: boolean;
+  externalUrl?: string;
+  ctaLabel?: string;
 };
 
 export type GalleryItem = {
@@ -72,6 +74,27 @@ export type Order = {
   createdAt: string;
 };
 
+export type SiteSettings = {
+  siteName: string;
+  email: string;
+  phone: string;
+  headline: string;
+  tagline: string;
+  disclaimer?: string;
+  heroExternalUrl?: string;
+  heroExternalLabel?: string;
+  musicUrl?: string;
+  videoUrl?: string;
+};
+
+export type TrainingProgram = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  level: string;
+};
+
 export type SiteData = {
   pages: PageContent[];
   products: Product[];
@@ -79,12 +102,7 @@ export type SiteData = {
   faqs: FAQ[];
   pricing: PricingPlan[];
   services: Service[];
+  programs: TrainingProgram[];
   orders: Order[];
-  settings: {
-    siteName: string;
-    email: string;
-    phone: string;
-    headline: string;
-    tagline: string;
-  };
+  settings: SiteSettings;
 };

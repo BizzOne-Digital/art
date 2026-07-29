@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -5,7 +6,11 @@ import { ContactForm } from "@/components/ContactForm";
 import { getPage, getSiteData } from "@/lib/data";
 import { Mail, Phone } from "lucide-react";
 
-export const metadata = { title: "Contact" };
+export const metadata: Metadata = {
+  title: "Contact Elite Body Fitness Pros",
+  description:
+    "Contact Elite Body Fitness Pros about fitness apps, packages, and shop products.",
+};
 
 export default async function ContactPage() {
   const page = await getPage("contact");
@@ -15,9 +20,12 @@ export default async function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow={hero?.subtitle}
-        title={hero?.title || "Let's Build Your Strongest Self"}
-        body={hero?.body}
+        eyebrow={hero?.subtitle || "Get In Touch"}
+        title={hero?.title || "Contact Elite Body Fitness Pros"}
+        body={
+          hero?.body ||
+          "Have questions about Elite Body Fitness Pros apps, packages, or shop products? Reach out — we respond fast."
+        }
         image={hero?.image}
       />
 
@@ -25,12 +33,13 @@ export default async function ContactPage() {
         <div className="container-site grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <Reveal direction="left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs sm:tracking-[0.28em]">
-              Reach Us
+              Reach Elite Body Fitness Pros
             </p>
             <h2 className="heading-lg mt-3">We Reply Fast</h2>
             <p className="mt-4 text-sm text-[var(--muted)] sm:text-base">
-              Product inquiries, booking questions, or coaching details — send
-              a message and we&apos;ll follow up.
+              At Elite Body Fitness Pros, we respond quickly to questions about
+              our fitness apps, packages, and products for purchase — no booking
+              required.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -53,7 +62,15 @@ export default async function ContactPage() {
 
           <Reveal direction="right">
             <div className="border border-[var(--line)] bg-[var(--bg-elevated)] p-4 sm:p-6 md:p-8">
-              <Suspense fallback={<div className="text-[var(--muted)]">Loading form...</div>}>
+              <p className="mb-4 text-sm text-[var(--muted)]">
+                Ask about apps, packages, or products — we&apos;ll get back to
+                you soon.
+              </p>
+              <Suspense
+                fallback={
+                  <div className="text-[var(--muted)]">Loading form...</div>
+                }
+              >
                 <ContactForm />
               </Suspense>
             </div>

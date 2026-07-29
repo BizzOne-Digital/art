@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { isAuthenticated } from "@/lib/auth";
-import { getFaqs, updateSiteData } from "@/lib/data";
+import { createFaq, deleteFaq, getFaqs, updateFaq } from "@/lib/data";
 import type { FAQ } from "@/lib/types";
 
 export async function GET() {
@@ -21,12 +21,8 @@ export async function POST(req: NextRequest) {
     order: Number(body.order) || 99,
   };
 
-  await updateSiteData((data) => {
-    data.faqs.push(faq);
-    return data;
-  });
-
-  return NextResponse.json(faq, { status: 201 });
+  const created = await createFaq(faq);
+  return NextResponse.json(created, { status: 201 });
 }
 
 export async function PUT(req: NextRequest) {
@@ -35,13 +31,8 @@ export async function PUT(req: NextRequest) {
   }
 
   const faq = (await req.json()) as FAQ;
-  await updateSiteData((data) => {
-    const idx = data.faqs.findIndex((f) => f.id === faq.id);
-    if (idx !== -1) data.faqs[idx] = faq;
-    return data;
-  });
-
-  return NextResponse.json(faq);
+  const updated = await updateFaq(faq);
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(req: NextRequest) {
@@ -50,10 +41,6 @@ export async function DELETE(req: NextRequest) {
   }
 
   const { id } = await req.json();
-  await updateSiteData((data) => {
-    data.faqs = data.faqs.filter((f) => f.id !== id);
-    return data;
-  });
-
+  await deleteFaq(id);
   return NextResponse.json({ ok: true });
 }

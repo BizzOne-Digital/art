@@ -11,6 +11,8 @@ const empty: Omit<Product, "id"> = {
   image: "",
   featured: false,
   active: true,
+  externalUrl: "",
+  ctaLabel: "",
 };
 
 export default function AdminProductsPage() {
@@ -42,6 +44,8 @@ export default function AdminProductsPage() {
       image: p.image,
       featured: p.featured,
       active: p.active,
+      externalUrl: p.externalUrl || "",
+      ctaLabel: p.ctaLabel || "",
     });
   }
 
@@ -126,6 +130,28 @@ export default function AdminProductsPage() {
               value={draft.image}
               onChange={(url) => setDraft({ ...draft, image: url })}
             />
+            <label>
+              <span className="admin-label">External Shop URL</span>
+              <input
+                className="admin-input"
+                value={draft.externalUrl || ""}
+                onChange={(e) =>
+                  setDraft({ ...draft, externalUrl: e.target.value })
+                }
+                placeholder="https://..."
+              />
+            </label>
+            <label>
+              <span className="admin-label">CTA Label</span>
+              <input
+                className="admin-input"
+                value={draft.ctaLabel || ""}
+                onChange={(e) =>
+                  setDraft({ ...draft, ctaLabel: e.target.value })
+                }
+                placeholder="Visit Shop / Coming Soon!"
+              />
+            </label>
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"

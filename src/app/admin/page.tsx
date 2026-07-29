@@ -9,7 +9,6 @@ export default async function AdminDashboard() {
     { label: "Pages", value: data.pages.length, href: "/admin/pages" },
     { label: "Products", value: data.products.length, href: "/admin/products" },
     { label: "Gallery", value: data.gallery.length, href: "/admin/gallery" },
-    { label: "FAQs", value: data.faqs.length, href: "/admin/faqs" },
     { label: "Orders", value: data.orders.length, href: "/admin/orders" },
     { label: "New Orders", value: newOrders, href: "/admin/orders" },
   ];
@@ -45,8 +44,8 @@ export default async function AdminDashboard() {
         <ul className="mt-4 space-y-2 text-sm text-[var(--muted)]">
           <li>▸ Edit each page section title, body, and image under Pages.</li>
           <li>▸ Products always show “Inquire for Price” and send inquiries to Orders.</li>
-          <li>▸ Gallery images and FAQs can be added, edited, or removed anytime.</li>
-          <li>▸ Testimonials are static on the public site (not managed here).</li>
+          <li>▸ Gallery images can be added, edited, or removed anytime.</li>
+          <li>▸ Packages, Training Programs, About, and Pricing content can be updated when the client provides finals.</li>
         </ul>
       </div>
     </div>

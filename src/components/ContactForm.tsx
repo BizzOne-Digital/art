@@ -11,7 +11,7 @@ export function ContactForm({
   showDate = false,
   submitLabel = "Send Message",
 }: {
-  defaultType?: "contact" | "product_inquiry" | "booking";
+  defaultType?: "contact" | "product_inquiry";
   productName?: string;
   productId?: string;
   showService?: boolean;
@@ -61,7 +61,7 @@ export function ContactForm({
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       {inquiryProduct && (
-        <div className="border border-[var(--line)] bg-[rgba(184,255,46,0.06)] px-4 py-3 text-sm text-[var(--neon)]">
+        <div className="border border-[var(--line)] bg-[rgba(0,180,255,0.08)] px-4 py-3 text-sm text-[var(--neon)]">
           Price inquiry for: <strong>{inquiryProduct}</strong>
         </div>
       )}
@@ -87,12 +87,9 @@ export function ContactForm({
           <span className="admin-label">Service</span>
           <select name="service" className="admin-input" defaultValue="">
             <option value="">Select a service</option>
-            <option>Personal Training</option>
+            <option>Scientifically Designed Program Structure</option>
             <option>Strength Programming</option>
-            <option>Nutrition Coaching</option>
-            <option>Online Coaching</option>
-            <option>Group Sessions</option>
-            <option>Mobility & Recovery</option>
+            <option>Nutritional Guidance</option>
           </select>
         </label>
       )}

@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/auth";
-import { updateSiteData } from "@/lib/data";
+import {
+  getPricing,
+  getServices,
+  getSettings,
+  replacePricing,
+  replaceServices,
+  updateSettings,
+} from "@/lib/data";
 import type { PricingPlan, Service } from "@/lib/types";
 
 export async function PUT(req: NextRequest) {
@@ -9,16 +16,20 @@ export async function PUT(req: NextRequest) {
   }
 
   const body = await req.json();
-  const data = await updateSiteData((current) => {
-    if (body.settings) current.settings = { ...current.settings, ...body.settings };
-    if (body.pricing) current.pricing = body.pricing as PricingPlan[];
-    if (body.services) current.services = body.services as Service[];
-    return current;
-  });
+
+  if (body.settings) {
+    await updateSettings(body.settings);
+  }
+  if (body.pricing) {
+    await replacePricing(body.pricing as PricingPlan[]);
+  }
+  if (body.services) {
+    await replaceServices(body.services as Service[]);
+  }
 
   return NextResponse.json({
-    settings: data.settings,
-    pricing: data.pricing,
-    services: data.services,
+    settings: await getSettings(),
+    pricing: await getPricing(),
+    services: await getServices(),
   });
 }

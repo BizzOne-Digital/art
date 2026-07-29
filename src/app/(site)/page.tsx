@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   Target,
   Flame,
   ShieldCheck,
-  Timer,
 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
@@ -15,83 +15,80 @@ import {
   getProducts,
   getServices,
   getGallery,
+  getSettings,
 } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Elite Body Fitness Pros | Home",
+  description:
+    "At Elite Body Fitness Pros, we deliver personalized, science-based training that fits your schedule and transforms your results.",
+};
 
 const pillars = [
   {
     icon: Target,
     title: "Goal-Mapped Plans",
-    body: "Every program starts with your goal, schedule, and recovery capacity — then builds with precision.",
+    body: "At Elite Body Fitness Pros, every program starts with your goal, schedule, and recovery capacity — then builds with precision.",
   },
   {
     icon: Flame,
     title: "High-Intensity Focus",
-    body: "Sessions stay sharp and intentional so you train hard without wasting time or burning out.",
+    body: "What you get with Elite Body Fitness Pros is sharp, intentional sessions so you train hard without wasting time or burning out.",
   },
   {
     icon: ShieldCheck,
     title: "Form-First Coaching",
-    body: "Clean technique first. Strength and aesthetics follow when movement quality is locked in.",
-  },
-  {
-    icon: Timer,
-    title: "Schedule-Friendly",
-    body: "Science-based training that fits real life — mornings, evenings, hybrid, or fully remote.",
+    body: "At Elite Body Fitness Pros, we lock in clean technique first — strength and aesthetics follow when movement quality is solid.",
   },
 ];
 
 const steps = [
   {
     step: "01",
-    title: "Consult",
-    body: "Share your goals, history, and availability so we can map the right training path.",
+    title: "Program",
+    body: "Get a personalized Elite Body Fitness Pros plan built around strength, conditioning, and recovery.",
   },
   {
     step: "02",
-    title: "Program",
-    body: "Get a personalized, progressive plan built around strength, conditioning, and recovery.",
+    title: "Train",
+    body: "Train with Elite Body Fitness Pros through coach-guided sessions, form checks, and weekly accountability.",
   },
   {
     step: "03",
-    title: "Train",
-    body: "Coach-guided sessions with form checks, intensity control, and weekly accountability.",
-  },
-  {
-    step: "04",
     title: "Transform",
-    body: "Track measurable progress and keep leveling into the strongest version of you.",
+    body: "Track measurable progress at Elite Body Fitness Pros and keep leveling into your strongest self.",
   },
 ];
 
 const homeQuotes = [
   {
     name: "Marcus R.",
-    role: "Athlete",
+    role: "App User",
     quote:
-      "Elite programming with zero fluff. I got stronger, moved better, and stayed consistent.",
+      "The Elite Body Fitness Pros app kept me consistent — smart tracking and clear progress with zero fluff.",
   },
   {
     name: "Sofia L.",
-    role: "Entrepreneur",
+    role: "App User",
     quote:
-      "They built a plan around my schedule. Results showed up fast — and stuck.",
+      "Personalized plans in the Elite Body Fitness Pros app fit my schedule. Results showed up fast — and stuck.",
   },
   {
     name: "Jordan K.",
-    role: "Client",
+    role: "App User",
     quote:
-      "From nervous beginner to confident lifter. The coaching detail is next level.",
+      "From guessing workouts to designed app programs with Elite Body Fitness Pros. Progress finally feels measurable.",
   },
 ];
 
 const marqueeItems = [
+  "Elite Body Fitness Pros",
   "Science-Based Training",
   "Personalized Coaching",
   "Strength & Conditioning",
+  "Train With Elite Body Fitness Pros",
   "Mobility & Recovery",
   "Nutrition Guidance",
-  "Hybrid & Online Plans",
-  "Elite Results",
 ];
 
 export default async function HomePage() {
@@ -107,6 +104,7 @@ export default async function HomePage() {
   const services = (await getServices()).slice(0, 3);
   const products = (await getProducts()).filter((p) => p.featured).slice(0, 3);
   const gallery = (await getGallery()).slice(0, 6);
+  const settings = await getSettings();
 
   return (
     <>
@@ -116,8 +114,11 @@ export default async function HomePage() {
         title={hero?.title || "Unleash The Strongest Version of You"}
         body={hero?.body}
         image={hero?.image}
-        ctaText={hero?.ctaText || "Start Training"}
-        ctaLink={hero?.ctaLink || "/booking"}
+        video={settings.videoUrl}
+        ctaText={hero?.ctaText || "Explore Packages"}
+        ctaLink={hero?.ctaLink || "/packages"}
+        externalText={settings.heroExternalLabel || "Visit Our Site"}
+        externalLink={settings.heroExternalUrl}
       />
 
       <div className="gradient-band overflow-hidden py-3 sm:py-4">
@@ -141,23 +142,23 @@ export default async function HomePage() {
         <div className="container-site relative">
           <Reveal direction="up">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs sm:tracking-[0.28em]">
-              {why?.subtitle || "Why Elite Body"}
+              {why?.subtitle || "Why Choose Elite Body Fitness Pros"}
             </p>
             <h2 className="heading-lg mt-3 max-w-3xl">
               {why?.title || (
                 <>
-                  Strength With{" "}
-                  <span className="text-gradient">Purpose</span>
+                  Why Train With{" "}
+                  <span className="text-gradient">Elite Body Fitness Pros</span>
                 </>
               )}
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-[var(--muted)] sm:text-base">
-              {why?.body ||
-                "Dark, focused, and results-driven coaching designed to transform how you train, recover, and perform."}
+              Focused, and results-driven programs designed to transform how you
+              train, recover, and perform.
             </p>
           </Reveal>
 
-          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
             {pillars.map((item, i) => {
               const Icon = item.icon;
               return (
@@ -201,7 +202,7 @@ export default async function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,6,5,0.85)] via-transparent to-[rgba(61,255,181,0.12)]" />
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
                 <p className="heading-md text-gradient">
-                  Science. Discipline. Results.
+                  At Elite Body Fitness Pros
                 </p>
               </div>
             </div>
@@ -215,16 +216,16 @@ export default async function HomePage() {
               {about?.body}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] sm:mt-4 sm:text-base">
-              From foundational strength to elite performance, we coach with
-              clarity — progressive overload, recovery science, and habits that
-              stick beyond the gym floor.
+              From foundational strength to elite performance, Elite Body
+              Fitness Pros coaches with clarity — progressive overload, recovery
+              science, and habits that stick beyond the gym floor.
             </p>
             <div className="btn-row mt-7 sm:mt-8">
               <Link href="/about" className="glow-btn">
                 About Us <ArrowRight size={16} />
               </Link>
-              <Link href="/services" className="ghost-btn">
-                Explore Services
+              <Link href="/packages" className="ghost-btn">
+                Explore Packages
               </Link>
             </div>
           </Reveal>
@@ -246,12 +247,12 @@ export default async function HomePage() {
               )}
             </h2>
             <p className="mt-4 max-w-2xl text-sm text-[var(--muted)] sm:text-base">
-              {method?.body ||
-                "A clear path designed for momentum — consult, program, train, and transform with elite coaching at every step."}
+              A clear path designed for momentum — program, train, and transform
+              with elite coaching at every step.
             </p>
           </Reveal>
 
-          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
             {steps.map((item, i) => (
               <StaggerItem
                 key={item.step}
@@ -316,8 +317,8 @@ export default async function HomePage() {
 
           <Reveal direction="up" delay={0.2}>
             <div className="mt-8 sm:mt-10">
-              <Link href="/services" className="ghost-btn w-full sm:w-auto">
-                View All Services
+              <Link href="/packages" className="ghost-btn w-full sm:w-auto">
+                View All Packages
               </Link>
             </div>
           </Reveal>
@@ -333,10 +334,13 @@ export default async function HomePage() {
                   Featured Products
                 </p>
                 <h2 className="heading-lg mt-3">
-                  Train With <span className="text-gradient">Elite Gear</span>
+                  Train With{" "}
+                  <span className="text-gradient">Elite Body Fitness Pros</span>{" "}
+                  Gear
                 </h2>
                 <p className="mt-3 max-w-xl text-sm text-[var(--muted)] sm:text-base">
-                  Curated performance essentials. Every product is inquire-for-price —
+                  What you get with Elite Body Fitness Pros shop essentials is
+                  performance-ready gear. Every product is inquire-for-price —
                   ask us and we&apos;ll respond fast.
                 </p>
               </div>
@@ -346,11 +350,15 @@ export default async function HomePage() {
             </div>
           </Reveal>
 
-          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
+          <Stagger className="mt-8 grid items-stretch gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
             {products.map((product, i) => (
-              <StaggerItem key={product.id} direction={i === 1 ? "rock" : "up"}>
-                <article className="gradient-panel overflow-hidden">
-                  <div className="relative aspect-square overflow-hidden">
+              <StaggerItem
+                key={product.id}
+                className="h-full"
+                direction={i === 1 ? "rock" : "up"}
+              >
+                <article className="gradient-panel flex h-full flex-col overflow-hidden">
+                  <div className="relative aspect-square shrink-0 overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -360,20 +368,39 @@ export default async function HomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,6,5,0.75)] to-transparent" />
                   </div>
-                  <div className="p-4 sm:p-5">
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
                     <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--neon)]">
                       {product.category}
                     </p>
-                    <h3 className="heading-md mt-2">{product.name}</h3>
+                    <h3 className="heading-md mt-2 line-clamp-2 min-h-[2.6em]">
+                      {product.name}
+                    </h3>
                     <p className="mt-2 text-sm text-[var(--muted)]">
-                      Inquire for Price
+                      {product.ctaLabel || "Inquire for Price"}
                     </p>
-                    <Link
-                      href={`/contact?product=${encodeURIComponent(product.name)}&productId=${product.id}`}
-                      className="glow-btn mt-4 w-full !px-4 !py-2 text-xs sm:mt-5"
-                    >
-                      Inquire for Price
-                    </Link>
+                    <div className="mt-auto pt-4">
+                      {product.externalUrl ? (
+                        <a
+                          href={product.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glow-btn w-full !px-4 !py-2 text-xs"
+                        >
+                          {product.ctaLabel || "Visit Shop"}
+                        </a>
+                      ) : /coming soon/i.test(product.ctaLabel || "") ? (
+                        <span className="inline-flex w-full cursor-default items-center justify-center border border-[var(--line)] px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+                          {product.ctaLabel}
+                        </span>
+                      ) : (
+                        <Link
+                          href={`/contact?product=${encodeURIComponent(product.name)}&productId=${product.id}`}
+                          className="glow-btn w-full !px-4 !py-2 text-xs"
+                        >
+                          Inquire for Price
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </article>
               </StaggerItem>
@@ -385,12 +412,13 @@ export default async function HomePage() {
       <section className="section-pad">
         <div className="container-site">
           <Reveal direction="up">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs sm:tracking-[0.28em]">
-              Client Proof
-            </p>
-            <h2 className="heading-lg mt-3">
-              Voices From The <span className="text-gradient">Floor</span>
-            </h2>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs sm:tracking-[0.28em]">
+                  App Results
+                </p>
+                <h2 className="heading-lg mt-3">
+                  Designed App Results From{" "}
+                  <span className="text-gradient">Elite Body Fitness Pros</span>
+                </h2>
           </Reveal>
 
           <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
@@ -431,7 +459,8 @@ export default async function HomePage() {
                   Gallery
                 </p>
                 <h2 className="heading-lg mt-3">
-                  Inside The <span className="text-gradient">Grind</span>
+                  Inside{" "}
+                  <span className="text-gradient">Elite Body Fitness Pros</span>
                 </h2>
               </div>
               <Link href="/gallery" className="ghost-btn w-full sm:w-auto">
@@ -504,11 +533,11 @@ export default async function HomePage() {
               {cta?.body}
             </p>
             <div className="btn-row mx-auto mt-7 max-w-md justify-center sm:mt-8">
-              <Link href={cta?.ctaLink || "/booking"} className="glow-btn">
-                {cta?.ctaText || "Book Now"}
+              <Link href={cta?.ctaLink || "/contact"} className="glow-btn">
+                {cta?.ctaText || "Contact Us"}
               </Link>
-              <Link href="/contact" className="ghost-btn">
-                Ask a Question
+              <Link href="/packages" className="ghost-btn">
+                View Packages
               </Link>
             </div>
           </Reveal>

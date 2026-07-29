@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { isAuthenticated } from "@/lib/auth";
-import { getAllProducts, getProducts, updateSiteData } from "@/lib/data";
+import {
+  createProduct,
+  deleteProduct,
+  getAllProducts,
+  getProducts,
+  updateProduct,
+} from "@/lib/data";
 import type { Product } from "@/lib/types";
 
 export async function GET(req: NextRequest) {
@@ -29,14 +35,12 @@ export async function POST(req: NextRequest) {
     image: body.image || "",
     featured: !!body.featured,
     active: body.active !== false,
+    externalUrl: body.externalUrl || "",
+    ctaLabel: body.ctaLabel || "",
   };
 
-  await updateSiteData((data) => {
-    data.products.push(product);
-    return data;
-  });
-
-  return NextResponse.json(product, { status: 201 });
+  const created = await createProduct(product);
+  return NextResponse.json(created, { status: 201 });
 }
 
 export async function PUT(req: NextRequest) {
@@ -45,13 +49,8 @@ export async function PUT(req: NextRequest) {
   }
 
   const product = (await req.json()) as Product;
-  await updateSiteData((data) => {
-    const idx = data.products.findIndex((p) => p.id === product.id);
-    if (idx !== -1) data.products[idx] = product;
-    return data;
-  });
-
-  return NextResponse.json(product);
+  const updated = await updateProduct(product);
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(req: NextRequest) {
@@ -60,10 +59,6 @@ export async function DELETE(req: NextRequest) {
   }
 
   const { id } = await req.json();
-  await updateSiteData((data) => {
-    data.products = data.products.filter((p) => p.id !== id);
-    return data;
-  });
-
+  await deleteProduct(id);
   return NextResponse.json({ ok: true });
 }

@@ -3,11 +3,18 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
+import {
+  isMusicReady,
+  playMusicFromGesture,
+  registerMusicReady,
+} from "@/lib/music-events";
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
   const [show, setShow] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const [musicReady, setMusicReadyState] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -15,17 +22,38 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
       setShow(false);
       return;
     }
-    const seen = sessionStorage.getItem("ebfp_intro_seen");
-    if (seen) {
-      setShow(false);
-      return;
-    }
-    const t = setTimeout(() => {
-      setShow(false);
-      sessionStorage.setItem("ebfp_intro_seen", "1");
-    }, 2800);
-    return () => clearTimeout(t);
+    return registerMusicReady(setMusicReadyState);
   }, [reduce]);
+
+  function enter() {
+    if (leaving) return;
+
+    // CRITICAL: play must run in this click stack (browser autoplay rules)
+    playMusicFromGesture();
+
+    setLeaving(true);
+    window.setTimeout(() => {
+      setShow(false);
+      try {
+        sessionStorage.setItem("ebfp_intro_seen", "1");
+      } catch {
+        /* ignore */
+      }
+    }, 650);
+  }
+
+  useEffect(() => {
+    if (!mounted || reduce || !show) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        enter();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, reduce, show, leaving]);
 
   if (!mounted) {
     return <>{children}</>;
@@ -36,10 +64,14 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
       {children}
       {show && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[var(--bg)]"
+          role="button"
+          tabIndex={0}
+          aria-label="Enter site and start music"
+          onClick={enter}
+          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[var(--bg)]"
           initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          animate={{ opacity: leaving ? 0 : 1, y: leaving ? "-8%" : 0 }}
+          transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
         >
           <div className="pointer-events-none absolute inset-0">
             {Array.from({ length: 18 }).map((_, i) => (
@@ -72,7 +104,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           >
             <Logo />
             <motion.p
-              className="font-display text-3xl tracking-[0.08em] text-white sm:text-5xl"
+              className="font-display px-1 text-2xl tracking-[0.08em] text-white sm:text-5xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.6 }}
@@ -87,14 +119,17 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             />
+            <motion.p
+              className="mt-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--neon)] sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.45, 1, 0.45] }}
+              transition={{ delay: 0.5, duration: 2, repeat: Infinity }}
+            >
+              {musicReady || isMusicReady()
+                ? "Tap to enter"
+                : "Loading music…"}
+            </motion.p>
           </motion.div>
-
-          <motion.div
-            className="absolute inset-0 bg-[var(--bg)]"
-            initial={{ y: "100%" }}
-            animate={{ y: "0%" }}
-            transition={{ delay: 2.1, duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
-          />
         </motion.div>
       )}
     </>

@@ -38,7 +38,7 @@ export default function AdminOrdersPage() {
     <div>
       <h1 className="font-display text-5xl tracking-[0.05em]">Orders</h1>
       <p className="mt-2 text-sm text-[var(--muted)]">
-        Product inquiries, bookings, and contact messages.
+        Product inquiries and contact messages.
       </p>
 
       <div className="mt-8 space-y-4">
