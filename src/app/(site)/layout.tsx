@@ -5,6 +5,9 @@ import { DisclaimerBar } from "@/components/DisclaimerBar";
 import { SiteMusic } from "@/components/SiteMusic";
 import { getSettings } from "@/lib/data";
 
+/** MongoDB is only available at runtime (e.g. Atlas on Vercel), not during build. */
+export const dynamic = "force-dynamic";
+
 export default async function SiteLayout({
   children,
 }: {

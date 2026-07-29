@@ -102,9 +102,14 @@ export async function getSiteData(): Promise<SiteData> {
 }
 
 export async function getPage(slug: string): Promise<PageContent | undefined> {
-  await connectDB();
-  const page = await PageModel.findOne({ slug }).lean();
-  return page ? lean<PageContent>(page) : undefined;
+  try {
+    await connectDB();
+    const page = await PageModel.findOne({ slug }).lean();
+    return page ? lean<PageContent>(page) : undefined;
+  } catch (err) {
+    console.error(`getPage(${slug}) failed:`, err);
+    return undefined;
+  }
 }
 
 export async function getPages(): Promise<PageContent[]> {
@@ -304,9 +309,14 @@ export async function deleteOrder(id: string): Promise<void> {
 }
 
 export async function getSettings(): Promise<SiteSettings> {
-  await connectDB();
-  const settings = await SettingsModel.findOne({ key: "site" }).lean();
-  return mapSettings(settings as Record<string, unknown> | null);
+  try {
+    await connectDB();
+    const settings = await SettingsModel.findOne({ key: "site" }).lean();
+    return mapSettings(settings as Record<string, unknown> | null);
+  } catch (err) {
+    console.error("getSettings failed, using defaults:", err);
+    return defaultSettings;
+  }
 }
 
 export async function updateSettings(
