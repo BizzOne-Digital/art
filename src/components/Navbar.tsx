@@ -22,27 +22,39 @@ const links = [
 ];
 
 function SiteBrand() {
+  const logoSize = "h-11 w-11 sm:h-12 sm:w-12";
+
   return (
     <Link
       href="/"
       aria-label="Elite Body Fitness Pros home"
-      className="flex shrink-0 flex-col items-center leading-none"
+      className="flex shrink-0 items-center gap-2 sm:gap-2.5"
     >
-      <Image
-        src={BRAND_LOGO}
-        alt="Elite Body Fitness Pros"
-        width={150}
-        height={60}
-        priority
-        className="h-10 w-auto object-contain sm:h-12 md:h-14"
-      />
-      <Image
-        src={ISSA_SEAL}
-        alt="ISSA Nationally Certified Trainer"
-        width={44}
-        height={44}
-        className="mt-0.5 h-6 w-auto object-contain sm:h-7"
-      />
+      <div
+        className={`relative shrink-0 overflow-hidden ${logoSize}`}
+        title="Elite Body Fitness Pros"
+      >
+        <Image
+          src={BRAND_LOGO}
+          alt="Elite Body Fitness Pros"
+          fill
+          priority
+          sizes="48px"
+          className="object-contain object-center scale-[2.1]"
+        />
+      </div>
+      <div
+        className={`relative shrink-0 ${logoSize}`}
+        title="ISSA Nationally Certified Trainer"
+      >
+        <Image
+          src={ISSA_SEAL}
+          alt="ISSA Nationally Certified Trainer"
+          fill
+          sizes="48px"
+          className="object-contain"
+        />
+      </div>
     </Link>
   );
 }
@@ -78,7 +90,7 @@ export function Navbar() {
           : "border-black/5 bg-white"
       }`}
     >
-      <div className="container-site flex min-w-0 items-center gap-3 px-3 py-2 sm:gap-4 sm:px-5 sm:py-2.5 md:px-6">
+      <div className="container-site flex min-w-0 items-center gap-3 px-3 py-1.5 sm:gap-4 sm:px-5 sm:py-2 md:px-6">
         <SiteBrand />
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-2 2xl:gap-3 xl:flex">
