@@ -1,9 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { OrangeConfetti, OrangeConfettiBurst } from "./OrangeConfetti";
 import {
   isMusicReady,
   playMusicFromGesture,
@@ -11,8 +9,6 @@ import {
 } from "@/lib/music-events";
 
 const INTRO_PROMO_VIDEO = "/intro-promo.mp4";
-const BRAND_LOGO = "/elite-body-logo.png";
-const ISSA_SEAL = "/issa-certified-seal.png";
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
@@ -73,9 +69,9 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           tabIndex={0}
           aria-label="Enter site and start music"
           onClick={enter}
-          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[var(--bg)]"
+          className="fixed inset-0 z-[100] flex cursor-pointer items-end justify-center overflow-hidden bg-black"
           initial={{ opacity: 1 }}
-          animate={{ opacity: leaving ? 0 : 1, y: leaving ? "-8%" : 0 }}
+          animate={{ opacity: leaving ? 0 : 1 }}
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
         >
           <video
@@ -89,82 +85,17 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           >
             <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
           </video>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(5,7,12,0.72)] via-[rgba(5,7,12,0.45)] to-[rgba(5,7,12,0.88)]" />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,180,255,0.12),transparent_65%)]" />
 
-          <div className="pointer-events-none absolute inset-0">
-            <OrangeConfetti count={28} />
-            {Array.from({ length: 18 }).map((_, i) => (
-              <motion.span
-                key={i}
-                className="absolute block bg-[var(--neon)]"
-                style={{
-                  left: `${(i * 7 + 5) % 100}%`,
-                  width: 6 + (i % 4) * 4,
-                  height: 6 + (i % 3) * 5,
-                  opacity: 0.25 + (i % 5) * 0.08,
-                  rotate: `${(i * 17) % 60}deg`,
-                }}
-                initial={{ y: -80, opacity: 0 }}
-                animate={{ y: "110vh", opacity: [0, 0.7, 0] }}
-                transition={{
-                  duration: 1.4 + (i % 5) * 0.2,
-                  delay: i * 0.05,
-                  ease: "easeIn",
-                }}
-              />
-            ))}
-            <OrangeConfettiBurst active={leaving} />
-          </div>
-
-          <motion.div
-            className="relative z-10 flex flex-col items-center gap-6 px-6 text-center"
-            initial={{ opacity: 0, scale: 0.85, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          <motion.p
+            className="relative z-10 mb-[max(2rem,env(safe-area-inset-bottom))] px-4 text-xs font-semibold uppercase tracking-[0.28em] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] sm:text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
           >
-            <Image
-              src={BRAND_LOGO}
-              alt="Elite Body Fitness Pros"
-              width={360}
-              height={200}
-              priority
-              className="h-auto w-full max-w-[240px] object-contain sm:max-w-[300px] md:max-w-[360px]"
-            />
-            <Image
-              src={ISSA_SEAL}
-              alt="ISSA Nationally Certified Trainer"
-              width={100}
-              height={100}
-              className="h-auto w-full max-w-[64px] object-contain sm:max-w-[80px]"
-            />
-            <motion.p
-              className="font-display px-1 text-2xl tracking-[0.08em] text-white sm:text-5xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.6 }}
-            >
-              UNLEASH THE STRONGEST
-              <br />
-              <span className="neon-text">VERSION OF YOU</span>
-            </motion.p>
-            <motion.div
-              className="h-[2px] w-24 bg-[var(--neon)]"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-            />
-            <motion.p
-              className="mt-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--neon)] sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.45, 1, 0.45] }}
-              transition={{ delay: 0.5, duration: 2, repeat: Infinity }}
-            >
-              {musicReady || isMusicReady()
-                ? "Tap to enter"
-                : "Loading music…"}
-            </motion.p>
-          </motion.div>
+            {musicReady || isMusicReady()
+              ? "Tap to enter"
+              : "Loading music…"}
+          </motion.p>
         </motion.div>
       )}
     </>
