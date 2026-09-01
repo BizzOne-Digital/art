@@ -27,7 +27,15 @@ export default function AdminProductsPage() {
   }
 
   useEffect(() => {
-    load();
+    let cancelled = false;
+    void fetch("/api/products?all=1")
+      .then((res) => res.json())
+      .then((data: Product[]) => {
+        if (!cancelled) setProducts(data);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function startCreate() {

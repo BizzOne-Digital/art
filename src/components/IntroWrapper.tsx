@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Logo } from "./Logo";
 import { OrangeConfetti, OrangeConfettiBurst } from "./OrangeConfetti";
 import {
@@ -12,17 +12,17 @@ import {
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
-  const [show, setShow] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  );
+  const [show, setShow] = useState(() => !reduce);
   const [leaving, setLeaving] = useState(false);
   const [musicReady, setMusicReadyState] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    if (reduce) {
-      setShow(false);
-      return;
-    }
+    if (reduce) return;
     return registerMusicReady(setMusicReadyState);
   }, [reduce]);
 

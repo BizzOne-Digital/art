@@ -12,7 +12,15 @@ export default function AdminOrdersPage() {
   }
 
   useEffect(() => {
-    load();
+    let cancelled = false;
+    void fetch("/api/orders")
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data: Order[]) => {
+        if (!cancelled) setOrders(data);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function setStatus(id: string, status: Order["status"]) {

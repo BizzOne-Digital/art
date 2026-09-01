@@ -18,7 +18,15 @@ export default function AdminFaqsPage() {
   }
 
   useEffect(() => {
-    load();
+    let cancelled = false;
+    void fetch("/api/faqs")
+      .then((res) => res.json())
+      .then((data: FAQ[]) => {
+        if (!cancelled) setFaqs(data);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function save() {

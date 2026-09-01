@@ -19,7 +19,15 @@ export default function AdminGalleryPage() {
   }
 
   useEffect(() => {
-    load();
+    let cancelled = false;
+    void fetch("/api/gallery")
+      .then((res) => res.json())
+      .then((data: GalleryItem[]) => {
+        if (!cancelled) setItems(data);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function save() {

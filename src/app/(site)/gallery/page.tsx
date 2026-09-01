@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Reveal";
 import { getGallery, getPage } from "@/lib/data";
 
 export const metadata: Metadata = {
