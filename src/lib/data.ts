@@ -133,12 +133,32 @@ export async function savePage(page: PageContent): Promise<PageContent> {
   return lean<PageContent>(updated);
 }
 
+const FEATURED_PRODUCT_ORDER = ["Apparel", "Resistance Bands", "Accessories"];
+
+function sortFeaturedProducts(products: Product[]): Product[] {
+  return [...products].sort((a, b) => {
+    const ai = FEATURED_PRODUCT_ORDER.indexOf(a.name);
+    const bi = FEATURED_PRODUCT_ORDER.indexOf(b.name);
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+}
+
 export async function getProducts(): Promise<Product[]> {
   await connectDB();
   const products = await ProductModel.find({ active: true })
     .sort({ createdAt: -1 })
     .lean();
-  return lean<Product[]>(products);
+  return sortFeaturedProducts(lean<Product[]>(products));
+}
+
+export async function getFeaturedProducts(): Promise<Product[]> {
+  await connectDB();
+  const products = await ProductModel.find({ active: true, featured: true })
+    .lean();
+  return sortFeaturedProducts(lean<Product[]>(products));
 }
 
 export async function getAllProducts(): Promise<Product[]> {

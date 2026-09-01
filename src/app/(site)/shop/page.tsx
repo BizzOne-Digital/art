@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
-import { getPage, getProducts } from "@/lib/data";
+import { getFeaturedProducts, getPage } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Shop Elite Body Fitness Pros Gear",
@@ -59,7 +59,7 @@ function ProductCta({
 export default async function ShopPage() {
   const page = await getPage("shop");
   const hero = page?.sections.find((s) => s.key === "hero");
-  const products = await getProducts();
+  const products = await getFeaturedProducts();
 
   return (
     <>

@@ -17,19 +17,6 @@ const products = [
   },
   {
     id: "prod-2",
-    name: "Accessories",
-    description:
-      "Fitness accessories and essentials available through our online shop.",
-    category: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1579722820308-d74e57ce3e79?w=800&q=80",
-    featured: true,
-    active: true,
-    externalUrl: "http://www.powerfulteees.etsy.com/",
-    ctaLabel: "Visit Shop",
-  },
-  {
-    id: "prod-3",
     name: "Resistance Bands",
     description:
       "Professional-grade resistance bands for warm-ups, mobility, and strength work.",
@@ -41,12 +28,30 @@ const products = [
     externalUrl: "",
     ctaLabel: "Coming Soon!",
   },
+  {
+    id: "prod-3",
+    name: "Accessories",
+    description:
+      "Fitness accessories and essentials including gym water bottles.",
+    category: "Accessories",
+    image:
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80",
+    featured: true,
+    active: true,
+    externalUrl: "http://www.powerfulteees.etsy.com/",
+    ctaLabel: "Visit Shop",
+  },
 ];
 
 async function main() {
   await connectDB();
-  await ProductModel.deleteMany({});
-  await ProductModel.insertMany(products);
+  for (const product of products) {
+    await ProductModel.findOneAndUpdate(
+      { id: product.id },
+      { $set: product },
+      { upsert: true }
+    );
+  }
   console.log(
     "Shop products updated:",
     products.map((p) => p.name).join(", ")

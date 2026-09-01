@@ -34,7 +34,8 @@ export function DiscountCodeBar() {
           for{" "}
           <span className="font-bold uppercase text-[var(--neon-bright)]">
             {DISCOUNT_LABEL}
-          </span>
+          </span>{" "}
+          at checkout
         </p>
 
         <button

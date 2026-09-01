@@ -12,7 +12,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { FallingRocks } from "@/components/FallingRocks";
 import {
   getPage,
-  getProducts,
+  getFeaturedProducts,
   getServices,
   getGallery,
   getSettings,
@@ -51,7 +51,7 @@ const steps = [
   {
     step: "02",
     title: "Train",
-    body: "Train with Elite Body Fitness Pros through coach-guided sessions, form checks, and weekly accountability.",
+    body: "Train with Elite Body Fitness Pros through coach-guided sessions w/ select packages, form checks, and weekly accountability.",
   },
   {
     step: "03",
@@ -102,7 +102,7 @@ export default async function HomePage() {
   const why = page?.sections.find((s) => s.key === "why-us");
   const cta = page?.sections.find((s) => s.key === "cta");
   const services = (await getServices()).slice(0, 3);
-  const products = (await getProducts()).filter((p) => p.featured).slice(0, 3);
+  const products = await getFeaturedProducts();
   const gallery = (await getGallery()).slice(0, 6);
   const settings = await getSettings();
 
@@ -531,6 +531,9 @@ export default async function HomePage() {
           <Reveal direction="up" delay={0.15}>
             <p className="mx-auto mt-4 max-w-xl px-1 text-sm text-[var(--muted)] sm:text-base">
               {cta?.body}
+            </p>
+            <p className="mx-auto mt-4 max-w-xl text-xs uppercase tracking-[0.16em] text-[var(--neon)] sm:text-sm">
+              Toll-free number coming soon
             </p>
             <div className="btn-row mx-auto mt-7 max-w-md justify-center sm:mt-8">
               <Link href={cta?.ctaLink || "/contact"} className="glow-btn">

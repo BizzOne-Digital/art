@@ -57,6 +57,10 @@ export default async function ContactPage() {
                 <Phone className="shrink-0 text-[var(--neon)]" size={18} />
                 +1 (916) 223-3228
               </a>
+              <div className="flex items-center gap-3 border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-4 text-sm text-[var(--muted)]">
+                <Phone className="shrink-0 text-[var(--neon)]" size={18} />
+                Toll-free number coming soon
+              </div>
             </div>
           </Reveal>
 

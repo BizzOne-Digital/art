@@ -29,8 +29,9 @@ export function DiscountCallout({ compact = false }: { compact?: boolean }) {
       </p>
       <h3 className="heading-md mt-2 text-white">{DISCOUNT_LABEL}</h3>
       <p className="mt-3 max-w-2xl text-sm text-[var(--muted)] sm:text-base">
-        Apply your discount at checkout or mention it when you inquire. Every
-        package qualifies — Starter, Elite, and Platinum.
+        Enter your code at checkout when you inquire — discount is not applied
+        automatically on the pricing page. Every package qualifies — Starter,
+        Elite, and Platinum.
       </p>
       <div className="mt-5 inline-flex items-center gap-3 border border-[rgba(255,210,0,0.45)] bg-[rgba(5,7,12,0.6)] px-4 py-3">
         <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">

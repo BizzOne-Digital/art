@@ -4,10 +4,6 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { DiscountCallout } from "@/components/DiscountCallout";
 import { getPage, getPricing } from "@/lib/data";
-import {
-  applyPackageDiscount,
-  DISCOUNT_CODE,
-} from "@/lib/promotions";
 
 export const metadata: Metadata = {
   title: "Pricing At Elite Body Fitness Pros",
@@ -37,22 +33,18 @@ export default async function PricingPage() {
           <Reveal direction="up" className="mb-8 sm:mb-10">
             <p className="max-w-3xl text-sm text-[var(--muted)] sm:text-base">
               At Elite Body Fitness Pros, pricing is built around coaching
-              intensity and support so you can invest with clarity.
+              intensity and support so you can invest with clarity. Apply your
+              discount code at checkout when you inquire.
             </p>
           </Reveal>
           <Stagger className="grid gap-6 lg:grid-cols-3">
-            {plans.map((plan, i) => {
-              const discountedPrice = applyPackageDiscount(plan.price);
-
-              return (
+            {plans.map((plan, i) => (
               <StaggerItem
                 key={plan.id}
                 direction={i === 1 ? "rock" : i === 0 ? "left" : "right"}
               >
                 <article
-                  id={
-                    /platinum/i.test(plan.name) ? "platinum" : undefined
-                  }
+                  id={/platinum/i.test(plan.name) ? "platinum" : undefined}
                   className={`relative flex h-full flex-col border p-5 scroll-mt-28 sm:p-7 ${
                     plan.highlighted
                       ? "border-[var(--neon)] bg-[rgba(0,180,255,0.08)] shadow-[0_0_40px_rgba(0,180,255,0.15)]"
@@ -60,8 +52,12 @@ export default async function PricingPage() {
                   }`}
                 >
                   {plan.highlighted && (
-                    <span className="absolute -top-3 left-4 bg-[var(--grad-neon)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#041018] sm:left-6"
-                      style={{ background: "linear-gradient(135deg,#00b4ff,#ff6a00,#ffd200)" }}
+                    <span
+                      className="absolute -top-3 left-4 bg-[var(--grad-neon)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#041018] sm:left-6"
+                      style={{
+                        background:
+                          "linear-gradient(135deg,#00b4ff,#ff6a00,#ffd200)",
+                      }}
                     >
                       Most Popular
                     </span>
@@ -70,42 +66,26 @@ export default async function PricingPage() {
                     {plan.name}
                   </p>
                   <div className="mt-4 flex flex-wrap items-end gap-x-2 gap-y-1">
-                    {discountedPrice ? (
-                      <>
-                        <span className="font-display text-5xl tracking-[0.04em] text-[var(--neon)] sm:text-6xl">
-                          {discountedPrice}
-                        </span>
-                        <span className="pb-2 text-lg text-[var(--muted)] line-through sm:text-xl">
-                          {plan.price}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="font-display text-5xl tracking-[0.04em] sm:text-6xl">
-                        {plan.price}
-                      </span>
-                    )}
+                    <span className="font-display text-5xl tracking-[0.04em] sm:text-6xl">
+                      {plan.price}
+                    </span>
                     <span className="pb-2 text-sm text-[var(--muted)]">
                       {plan.period}
                     </span>
                   </div>
-                  {discountedPrice && (
-                    <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--gold)]">
-                      10% off with {DISCOUNT_CODE}
-                    </p>
-                  )}
                   <p className="mt-4 text-sm text-[var(--muted)]">
                     {plan.description}
                   </p>
                   <ul className="mt-6 flex-1 space-y-3 text-sm">
-                    {plan.features.map((f, i) => (
-                      <li key={`${plan.id}-${i}`} className="flex gap-2">
+                    {plan.features.map((f, j) => (
+                      <li key={`${plan.id}-${j}`} className="flex gap-2">
                         <span className="text-[var(--neon)]">▸</span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
                   <Link
-                    href={`/contact?code=${DISCOUNT_CODE}&package=${encodeURIComponent(plan.name)}`}
+                    href={`/contact?package=${encodeURIComponent(plan.name)}`}
                     className={`mt-8 w-full text-center ${
                       plan.highlighted ? "glow-btn" : "ghost-btn"
                     }`}
@@ -114,8 +94,7 @@ export default async function PricingPage() {
                   </Link>
                 </article>
               </StaggerItem>
-            );
-            })}
+            ))}
           </Stagger>
 
           <Reveal

@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { DISCOUNT_LABEL } from "@/lib/promotions";
+import { DISCOUNT_CODE, DISCOUNT_LABEL } from "@/lib/promotions";
 
 export function ContactForm({
   defaultType = "contact",
@@ -24,43 +24,48 @@ export function ContactForm({
     productName || params.get("product") || undefined;
   const inquiryProductId =
     productId || params.get("productId") || undefined;
-  const discountCode = params.get("code") || "";
   const packageName = params.get("package") || "";
+  const initialCode = params.get("code") || "";
 
   const defaultMessage = useMemo(() => {
     if (inquiryProduct) {
       return `Hi, I'd like to inquire about the price for ${inquiryProduct}.`;
     }
-    if (packageName && discountCode) {
-      return `Hi, I'm interested in the ${packageName} and would like to use discount code ${discountCode} (${DISCOUNT_LABEL}).`;
-    }
     if (packageName) {
       return `Hi, I'm interested in the ${packageName}.`;
     }
-    if (discountCode) {
-      return `Hi, I'd like to inquire about a package using discount code ${discountCode} (${DISCOUNT_LABEL}).`;
-    }
     return "";
-  }, [discountCode, inquiryProduct, packageName]);
+  }, [inquiryProduct, packageName]);
 
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
     "idle"
   );
+  const [discountCode, setDiscountCode] = useState(initialCode);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
     const form = new FormData(e.currentTarget);
+    const enteredCode = String(form.get("discountCode") || "").trim();
+    let message = String(form.get("message") || "");
+
+    if (enteredCode) {
+      const codeNote = `Discount code: ${enteredCode.toUpperCase()} (${DISCOUNT_LABEL}).`;
+      message = message ? `${message}\n\n${codeNote}` : codeNote;
+    }
+
     const payload = {
       type: inquiryProduct ? "product_inquiry" : defaultType,
       name: String(form.get("name") || ""),
       email: String(form.get("email") || ""),
       phone: String(form.get("phone") || ""),
-      message: String(form.get("message") || ""),
+      message,
       service: String(form.get("service") || ""),
       preferredDate: String(form.get("preferredDate") || ""),
       productName: inquiryProduct,
       productId: inquiryProductId,
+      discountCode: enteredCode || undefined,
+      packageName: packageName || undefined,
     };
 
     try {
@@ -72,21 +77,17 @@ export function ContactForm({
       if (!res.ok) throw new Error("failed");
       setStatus("done");
       e.currentTarget.reset();
+      setDiscountCode("");
     } catch {
       setStatus("error");
     }
   }
 
+  const codeMatches =
+    discountCode.trim().toUpperCase() === DISCOUNT_CODE.toUpperCase();
+
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
-      {discountCode && (
-        <div className="border border-[rgba(255,210,0,0.45)] bg-[rgba(255,210,0,0.08)] px-4 py-3 text-sm text-[var(--gold)]">
-          Discount code applied:{" "}
-          <strong className="tracking-[0.1em]">{discountCode}</strong> —{" "}
-          {DISCOUNT_LABEL}
-        </div>
-      )}
-
       {packageName && !inquiryProduct && (
         <div className="border border-[var(--line)] bg-[rgba(0,180,255,0.08)] px-4 py-3 text-sm text-[var(--neon)]">
           Package inquiry: <strong>{packageName}</strong>
@@ -113,6 +114,22 @@ export function ContactForm({
       <label>
         <span className="admin-label">Phone</span>
         <input name="phone" className="admin-input" />
+      </label>
+
+      <label>
+        <span className="admin-label">Discount Code (apply at checkout)</span>
+        <input
+          name="discountCode"
+          className="admin-input uppercase tracking-[0.12em]"
+          placeholder={DISCOUNT_CODE}
+          value={discountCode}
+          onChange={(e) => setDiscountCode(e.target.value)}
+        />
+        {codeMatches && (
+          <span className="mt-2 block text-xs font-semibold text-[var(--gold)]">
+            {DISCOUNT_LABEL} will be applied to your package.
+          </span>
+        )}
       </label>
 
       {showService && (

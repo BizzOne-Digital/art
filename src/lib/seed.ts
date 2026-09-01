@@ -106,8 +106,8 @@ export const seedData: SiteData = {
         {
           id: "about-approach",
           key: "approach",
-          title: "What Elite Body Fitness Pros Stands For",
-          body: "What you get with Elite Body Fitness Pros is a blend of biomechanics, progressive overload, recovery science, and lifestyle coaching that fits real schedules.",
+          title: "What We Stand For",
+          body: "We believe real transformation happens with our expert training instructional apps. That's why we combine proven training methods with a culture of self belief, ensuring no one on their fitness journey ever feels like they're doing it alone. Elite Body Fitness Pros is a movement toward becoming your strongest and most self confident.",
           image:
             "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80",
         },
@@ -235,19 +235,6 @@ export const seedData: SiteData = {
     },
     {
       id: "prod-2",
-      name: "Accessories",
-      description:
-        "Fitness accessories and essentials available through our online shop.",
-      category: "Accessories",
-      image:
-        "https://images.unsplash.com/photo-1579722820308-d74e57ce3e79?w=800&q=80",
-      featured: true,
-      active: true,
-      externalUrl: "http://www.powerfulteees.etsy.com/",
-      ctaLabel: "Visit Shop",
-    },
-    {
-      id: "prod-3",
       name: "Resistance Bands",
       description:
         "Professional-grade resistance bands for warm-ups, mobility, and strength work.",
@@ -258,6 +245,19 @@ export const seedData: SiteData = {
       active: true,
       externalUrl: "",
       ctaLabel: "Coming Soon!",
+    },
+    {
+      id: "prod-3",
+      name: "Accessories",
+      description:
+        "Fitness accessories and essentials including gym water bottles.",
+      category: "Accessories",
+      image:
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80",
+      featured: true,
+      active: true,
+      externalUrl: "http://www.powerfulteees.etsy.com/",
+      ctaLabel: "Visit Shop",
     },
   ],
   gallery: [
@@ -364,8 +364,7 @@ export const seedData: SiteData = {
     {
       id: "svc-1",
       title: "Scientifically Designed Program Structure",
-      description:
-        "Placeholder package — replace with the client's final package details.",
+      description: "",
       image:
         "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80",
       icon: "layers",
@@ -373,8 +372,7 @@ export const seedData: SiteData = {
     {
       id: "svc-2",
       title: "Strength Programming",
-      description:
-        "Placeholder package — replace with the client's final package details.",
+      description: "",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
       icon: "zap",
@@ -382,8 +380,7 @@ export const seedData: SiteData = {
     {
       id: "svc-3",
       title: "Nutritional Guidance",
-      description:
-        "Placeholder package — replace with the client's final package details.",
+      description: "",
       image:
         "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
       icon: "apple",
@@ -394,7 +391,7 @@ export const seedData: SiteData = {
       id: "prog-1",
       title: "Strength Foundations",
       description:
-        "Placeholder training program — client will provide final details.",
+        "Perfect for building consistent habits and foundational strength.",
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
       level: "Beginner",
@@ -402,8 +399,7 @@ export const seedData: SiteData = {
     {
       id: "prog-2",
       title: "Athletic Performance",
-      description:
-        "Placeholder training program — client will provide final details.",
+      description: "Our most popular package for serious transformation.",
       image:
         "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&q=80",
       level: "Intermediate",
@@ -412,7 +408,7 @@ export const seedData: SiteData = {
       id: "prog-3",
       title: "Elite Transformation",
       description:
-        "Placeholder training program — client will provide final details.",
+        "Maximum coaching intensity for athletes and high performers.",
       image:
         "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=900&q=80",
       level: "Advanced",

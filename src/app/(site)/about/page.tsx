@@ -86,11 +86,14 @@ export default async function AboutPage() {
           </Reveal>
           <Reveal direction="right" className="md:order-1">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs sm:tracking-[0.28em]">
-              What You Get With Elite Body Fitness Pros
+              What We Stand For
             </p>
-            <h2 className="heading-lg mt-3">{approach?.title}</h2>
+            <h2 className="heading-lg mt-3">
+              {approach?.title || "What We Stand For"}
+            </h2>
             <p className="mt-4 text-sm leading-relaxed text-[var(--muted)] sm:mt-5 sm:text-base">
-              {approach?.body}
+              {approach?.body ||
+                "We believe real transformation happens with our expert training instructional apps. That's why we combine proven training methods with a culture of self belief, ensuring no one on their fitness journey ever feels like they're doing it alone. Elite Body Fitness Pros is a movement toward becoming your strongest and most self confident."}
             </p>
             <Link
               href="/contact"

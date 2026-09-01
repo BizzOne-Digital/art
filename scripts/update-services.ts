@@ -5,8 +5,7 @@ const services = [
   {
     id: "svc-1",
     title: "Scientifically Designed Program Structure",
-    description:
-      "Placeholder package — replace with the client's final package details.",
+    description: "",
     image:
       "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=80",
     icon: "layers",
@@ -14,8 +13,7 @@ const services = [
   {
     id: "svc-2",
     title: "Strength Programming",
-    description:
-      "Placeholder package — replace with the client's final package details.",
+    description: "",
     image:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
     icon: "zap",
@@ -23,8 +21,7 @@ const services = [
   {
     id: "svc-3",
     title: "Nutritional Guidance",
-    description:
-      "Placeholder package — replace with the client's final package details.",
+    description: "",
     image:
       "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
     icon: "apple",
@@ -33,8 +30,13 @@ const services = [
 
 async function main() {
   await connectDB();
-  await ServiceModel.deleteMany({});
-  await ServiceModel.insertMany(services);
+  for (const service of services) {
+    await ServiceModel.findOneAndUpdate(
+      { id: service.id },
+      { $set: service },
+      { upsert: true }
+    );
+  }
   console.log(
     "Services updated:",
     services.map((s) => s.title).join(", ")

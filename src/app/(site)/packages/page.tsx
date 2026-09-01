@@ -65,9 +65,6 @@ export default async function PackagesPage() {
                     <h2 className="heading-md line-clamp-2 min-h-[2.6em]">
                       {pkg.title}
                     </h2>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
-                      {pkg.description}
-                    </p>
                   </div>
                 </article>
               </StaggerItem>

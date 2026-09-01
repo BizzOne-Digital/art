@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 const testimonials = [
   {
     name: "Marcus R.",
-    role: "App User · Athlete",
+    role: "App User · Beginner",
     quote:
-      "The Elite Body Fitness Pros app kept my training locked in — smart tracking and clear progress so I finally stayed consistent.",
+      "From guessing workouts to following a designed program in the app — Elite Body Fitness Pros made progress feel simple and measurable.",
     image:
-      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&q=80",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
   },
   {
     name: "Sofia L.",
@@ -29,11 +29,11 @@ const testimonials = [
   },
   {
     name: "Jordan K.",
-    role: "App User · Beginner",
+    role: "App User · Athlete",
     quote:
-      "From guessing workouts to following a designed program in the app — Elite Body Fitness Pros made progress feel simple and measurable.",
+      "The Elite Body Fitness Pros app kept my training locked in — smart tracking and clear progress so I finally stayed consistent.",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
+      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&q=80",
   },
   {
     name: "Ava M.",
