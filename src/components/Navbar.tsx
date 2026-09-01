@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Logo } from "./Logo";
 
 const links = [
   { href: "/", label: "Home" },
@@ -49,16 +48,8 @@ export function Navbar() {
           : "border-black/5 bg-white"
       }`}
     >
-      <div className="container-site flex min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-5 sm:py-3.5 md:px-6">
-        <Link
-          href="/"
-          aria-label="Elite Body Fitness Pros home"
-          className="min-w-0 max-w-[70%] shrink"
-        >
-          <Logo compact variant="dark" />
-        </Link>
-
-        <nav className="hidden items-center gap-3 2xl:gap-4 xl:flex">
+      <div className="container-site flex min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-5 sm:py-3 md:px-6">
+        <nav className="hidden min-w-0 flex-1 items-center gap-3 2xl:gap-4 xl:flex">
           {links.map((link) => {
             const active = pathname === link.href;
             return (
@@ -77,7 +68,7 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3 xl:flex-none">
           <Link
             href="/pricing"
             className="glow-btn hidden !min-h-10 !px-3 !py-2 text-[11px] lg:inline-flex"

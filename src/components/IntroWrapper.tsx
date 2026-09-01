@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { Logo } from "./Logo";
 import { OrangeConfetti, OrangeConfettiBurst } from "./OrangeConfetti";
 import {
   isMusicReady,
@@ -11,6 +11,8 @@ import {
 } from "@/lib/music-events";
 
 const INTRO_PROMO_VIDEO = "/intro-promo.mp4";
+const BRAND_LOGO = "/elite-body-logo.png";
+const ISSA_SEAL = "/issa-certified-seal.png";
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
@@ -121,7 +123,21 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Logo />
+            <Image
+              src={BRAND_LOGO}
+              alt="Elite Body Fitness Pros"
+              width={360}
+              height={200}
+              priority
+              className="h-auto w-full max-w-[240px] object-contain sm:max-w-[300px] md:max-w-[360px]"
+            />
+            <Image
+              src={ISSA_SEAL}
+              alt="ISSA Nationally Certified Trainer"
+              width={100}
+              height={100}
+              className="h-auto w-full max-w-[64px] object-contain sm:max-w-[80px]"
+            />
             <motion.p
               className="font-display px-1 text-2xl tracking-[0.08em] text-white sm:text-5xl"
               initial={{ opacity: 0, y: 20 }}

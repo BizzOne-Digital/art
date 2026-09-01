@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DisclaimerBar } from "@/components/DisclaimerBar";
 import { SponsoredBar } from "@/components/SponsoredBar";
-import { IssaCertificationBar } from "@/components/IssaCertificationBar";
+import { BrandHeader } from "@/components/BrandHeader";
 import { PlatinumPromoBar } from "@/components/PlatinumPromoBar";
 import { DiscountCodeBar } from "@/components/DiscountCodeBar";
 import { SiteMusic } from "@/components/SiteMusic";
@@ -24,7 +24,7 @@ export default async function SiteLayout({
       <div className="flex min-h-screen flex-col">
         <DisclaimerBar text={settings.disclaimer} />
         <SponsoredBar />
-        <IssaCertificationBar />
+        <BrandHeader />
         <Navbar />
         <PlatinumPromoBar />
         <DiscountCodeBar />
