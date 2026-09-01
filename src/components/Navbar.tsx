@@ -1,14 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
+const BRAND_LOGO = "/elite-body-logo.png";
+const ISSA_SEAL = "/issa-certified-seal.png";
+
 const links = [
   { href: "/", label: "Home" },
   { href: "/packages", label: "Packages" },
-  { href: "/programs", label: "Training Programs" },
+  { href: "/programs", label: "Programs" },
   { href: "/about", label: "About" },
   { href: "/shop", label: "Shop" },
   { href: "/gallery", label: "Gallery" },
@@ -16,6 +20,32 @@ const links = [
   { href: "/testimonials", label: "Testimonials" },
   { href: "/contact", label: "Contact" },
 ];
+
+function SiteBrand() {
+  return (
+    <Link
+      href="/"
+      aria-label="Elite Body Fitness Pros home"
+      className="flex shrink-0 flex-col items-center leading-none"
+    >
+      <Image
+        src={BRAND_LOGO}
+        alt="Elite Body Fitness Pros"
+        width={150}
+        height={60}
+        priority
+        className="h-10 w-auto object-contain sm:h-12 md:h-14"
+      />
+      <Image
+        src={ISSA_SEAL}
+        alt="ISSA Nationally Certified Trainer"
+        width={44}
+        height={44}
+        className="mt-0.5 h-6 w-auto object-contain sm:h-7"
+      />
+    </Link>
+  );
+}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -48,15 +78,17 @@ export function Navbar() {
           : "border-black/5 bg-white"
       }`}
     >
-      <div className="container-site flex min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-5 sm:py-3 md:px-6">
-        <nav className="hidden min-w-0 flex-1 items-center gap-3 2xl:gap-4 xl:flex">
+      <div className="container-site flex min-w-0 items-center gap-3 px-3 py-2 sm:gap-4 sm:px-5 sm:py-2.5 md:px-6">
+        <SiteBrand />
+
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-2 2xl:gap-3 xl:flex">
           {links.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
+                className={`whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors 2xl:text-[11px] ${
                   active
                     ? "text-[#0086c9]"
                     : "text-[#222] hover:text-[#ff6a00]"
@@ -68,16 +100,16 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3 xl:flex-none">
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
           <Link
             href="/pricing"
-            className="glow-btn hidden !min-h-10 !px-3 !py-2 text-[11px] lg:inline-flex"
+            className="glow-btn hidden !min-h-9 !px-3 !py-2 text-[10px] lg:inline-flex 2xl:text-[11px]"
           >
             Start Now
           </Link>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center border border-black/15 text-[#0a0f0a] xl:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center border border-black/15 text-[#0a0f0a] xl:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
