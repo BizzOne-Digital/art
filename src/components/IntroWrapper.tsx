@@ -10,6 +10,8 @@ import {
   registerMusicReady,
 } from "@/lib/music-events";
 
+const INTRO_PROMO_VIDEO = "/intro-promo.mp4";
+
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
   const mounted = useSyncExternalStore(
@@ -74,6 +76,20 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           animate={{ opacity: leaving ? 0 : 1, y: leaving ? "-8%" : 0 }}
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
         >
+          <video
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden
+          >
+            <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
+          </video>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(5,7,12,0.72)] via-[rgba(5,7,12,0.45)] to-[rgba(5,7,12,0.88)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,180,255,0.12),transparent_65%)]" />
+
           <div className="pointer-events-none absolute inset-0">
             <OrangeConfetti count={28} />
             {Array.from({ length: 18 }).map((_, i) => (
