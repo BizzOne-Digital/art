@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { SiteBrand } from "@/components/SiteBrand";
 import {
   isMusicReady,
   playMusicFromGesture,
@@ -10,8 +10,6 @@ import {
 } from "@/lib/music-events";
 
 const INTRO_PROMO_VIDEO = "/intro-promo.mp4";
-const BRAND_LOGO = "/elite-body-logo.png";
-const ISSA_SEAL = "/issa-certified-seal.png";
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
@@ -107,34 +105,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-center justify-center gap-4 sm:gap-5">
-              <div
-                className="relative h-16 w-16 shrink-0 overflow-hidden sm:h-20 sm:w-20"
-                title="Elite Body Fitness Pros"
-              >
-                <Image
-                  src={BRAND_LOGO}
-                  alt="Elite Body Fitness Pros"
-                  fill
-                  priority
-                  sizes="80px"
-                  className="object-contain object-center scale-[2.1]"
-                />
-              </div>
-              <div
-                className="relative h-16 w-16 shrink-0 sm:h-20 sm:w-20"
-                title="ISSA Nationally Certified Trainer"
-              >
-                <Image
-                  src={ISSA_SEAL}
-                  alt="ISSA Nationally Certified Trainer"
-                  fill
-                  priority
-                  sizes="80px"
-                  className="object-contain"
-                />
-              </div>
-            </div>
+            <SiteBrand size="intro" linked={false} className="justify-center" />
 
             <div
               className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
