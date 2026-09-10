@@ -1,13 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-
-const BRAND_LOGO = "/elite-body-logo.png";
-const ISSA_SEAL = "/issa-certified-seal.png";
+import { SiteBrand } from "@/components/SiteBrand";
 
 const links = [
   { href: "/", label: "Home" },
@@ -18,44 +15,6 @@ const links = [
   { href: "/gallery", label: "Gallery" },
   { href: "/pricing", label: "Pricing" },
 ];
-
-function SiteBrand() {
-  const logoSize = "h-11 w-11 sm:h-12 sm:w-12";
-
-  return (
-    <Link
-      href="/"
-      aria-label="Elite Body Fitness Pros home"
-      className="flex shrink-0 items-center gap-2 sm:gap-2.5"
-    >
-      <div
-        className={`relative shrink-0 overflow-hidden ${logoSize}`}
-        title="Elite Body Fitness Pros"
-      >
-        <Image
-          src={BRAND_LOGO}
-          alt="Elite Body Fitness Pros"
-          fill
-          priority
-          sizes="48px"
-          className="object-contain object-center scale-[2.1]"
-        />
-      </div>
-      <div
-        className={`relative shrink-0 ${logoSize}`}
-        title="ISSA Nationally Certified Trainer"
-      >
-        <Image
-          src={ISSA_SEAL}
-          alt="ISSA Nationally Certified Trainer"
-          fill
-          sizes="48px"
-          className="object-contain"
-        />
-      </div>
-    </Link>
-  );
-}
 
 export function Navbar() {
   const pathname = usePathname();
