@@ -34,8 +34,7 @@ const products = [
     description:
       "Fitness accessories and essentials including gym water bottles.",
     category: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80",
+    image: "/accessories-product.jpg",
     featured: true,
     active: true,
     externalUrl: "http://www.powerfulteees.etsy.com/",

@@ -287,14 +287,15 @@ export default async function HomePage() {
             </p>
           </Reveal>
 
-          <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
+          <Stagger className="mt-8 grid items-stretch gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
             {services.map((svc, i) => (
               <StaggerItem
                 key={svc.id}
+                className="h-full"
                 direction={i % 2 === 0 ? "up" : "down"}
               >
-                <article className="group relative overflow-hidden border border-[var(--line)] bg-[var(--bg)]">
-                  <div className="relative aspect-[16/11] overflow-hidden">
+                <article className="group flex h-full flex-col overflow-hidden border border-[var(--line)] bg-[var(--bg)]">
+                  <div className="relative aspect-[16/11] shrink-0 overflow-hidden">
                     <Image
                       src={svc.image}
                       alt={svc.title}
@@ -304,9 +305,11 @@ export default async function HomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,6,5,0.85)] via-transparent to-[rgba(184,255,46,0.08)]" />
                   </div>
-                  <div className="p-5 sm:p-6">
-                    <h3 className="heading-md">{svc.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <h3 className="heading-md line-clamp-2 min-h-[2.6em]">
+                      {svc.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
                       {svc.description}
                     </p>
                   </div>

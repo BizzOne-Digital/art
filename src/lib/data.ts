@@ -135,6 +135,17 @@ export async function savePage(page: PageContent): Promise<PageContent> {
 
 const FEATURED_PRODUCT_ORDER = ["Apparel", "Resistance Bands", "Accessories"];
 
+const PRODUCT_IMAGES: Record<string, string> = {
+  Accessories: "/accessories-product.jpg",
+};
+
+function applyProductDefaults(products: Product[]): Product[] {
+  return products.map((product) => {
+    const image = PRODUCT_IMAGES[product.name];
+    return image ? { ...product, image } : product;
+  });
+}
+
 function sortFeaturedProducts(products: Product[]): Product[] {
   return [...products].sort((a, b) => {
     const ai = FEATURED_PRODUCT_ORDER.indexOf(a.name);
@@ -151,14 +162,18 @@ export async function getProducts(): Promise<Product[]> {
   const products = await ProductModel.find({ active: true })
     .sort({ createdAt: -1 })
     .lean();
-  return sortFeaturedProducts(lean<Product[]>(products));
+  return applyProductDefaults(
+    sortFeaturedProducts(lean<Product[]>(products))
+  );
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   await connectDB();
   const products = await ProductModel.find({ active: true, featured: true })
     .lean();
-  return sortFeaturedProducts(lean<Product[]>(products));
+  return applyProductDefaults(
+    sortFeaturedProducts(lean<Product[]>(products))
+  );
 }
 
 export async function getAllProducts(): Promise<Product[]> {
