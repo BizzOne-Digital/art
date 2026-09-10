@@ -39,7 +39,3 @@ export const testimonials: Testimonial[] = [
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
   },
 ];
-
-export const footerTestimonials = testimonials.filter(
-  (t) => t.name === "Marcus R." || t.name === "Jordan K."
-);
