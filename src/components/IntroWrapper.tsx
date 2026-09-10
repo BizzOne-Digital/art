@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   isMusicReady,
   playMusicFromGesture,
@@ -23,6 +23,25 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(() => !reduce);
   const [leaving, setLeaving] = useState(false);
   const [musicReady, setMusicReadyState] = useState(false);
+  const [videoUnmuted, setVideoUnmuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  function unmuteVideo() {
+    const video = videoRef.current;
+    if (!video || videoUnmuted) return;
+    video.muted = false;
+    void video.play();
+    setVideoUnmuted(true);
+  }
+
+  function handleOverlayClick() {
+    if (leaving) return;
+    if (!videoUnmuted) {
+      unmuteVideo();
+      return;
+    }
+    enter();
+  }
 
   useEffect(() => {
     if (reduce) return;
@@ -51,7 +70,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        enter();
+        handleOverlayClick();
       }
     };
     window.addEventListener("keydown", onKey);
@@ -71,7 +90,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           role="button"
           tabIndex={0}
           aria-label="Enter site and start music"
-          onClick={enter}
+          onClick={handleOverlayClick}
           className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[var(--bg)] px-4"
           initial={{ opacity: 1 }}
           animate={{ opacity: leaving ? 0 : 1, y: leaving ? "-6%" : 0 }}
@@ -118,10 +137,14 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             </div>
 
             <div
-              className="w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
-              aria-hidden
+              className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
+              onClick={(e) => {
+                e.stopPropagation();
+                unmuteVideo();
+              }}
             >
               <video
+                ref={videoRef}
                 className="aspect-video w-full object-cover"
                 autoPlay
                 muted
@@ -131,6 +154,16 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
               >
                 <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
               </video>
+              {!videoUnmuted && (
+                <div
+                  className="pointer-events-none absolute inset-0 flex items-end justify-center bg-black/20 pb-3"
+                  aria-hidden
+                >
+                  <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
+                    Tap video for sound
+                  </span>
+                </div>
+              )}
             </div>
 
             <motion.p
@@ -139,9 +172,11 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              {musicReady || isMusicReady()
-                ? "Tap to enter"
-                : "Loading music…"}
+              {!musicReady && !isMusicReady()
+                ? "Loading music…"
+                : videoUnmuted
+                  ? "Tap to enter"
+                  : "Tap for sound"}
             </motion.p>
           </motion.div>
         </motion.div>
