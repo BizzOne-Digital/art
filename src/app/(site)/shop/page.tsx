@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
-import { getFeaturedProducts, getPage } from "@/lib/data";
+import { getFeaturedProducts, getPage, PRODUCT_IMAGE_CLASS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Shop Elite Body Fitness Pros Gear",
@@ -89,7 +89,9 @@ export default async function ShopPage() {
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className={
+                        PRODUCT_IMAGE_CLASS[product.name] || "object-cover"
+                      }
                       sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
                     />
                   </div>

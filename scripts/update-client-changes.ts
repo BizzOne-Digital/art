@@ -21,8 +21,7 @@ const products = [
     description:
       "Professional-grade resistance bands for warm-ups, mobility, and strength work.",
     category: "Equipment",
-    image:
-      "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&q=80",
+    image: "/accessories-product.jpg",
     featured: true,
     active: true,
     externalUrl: "",

@@ -12,8 +12,9 @@ const links = [
   { href: "/programs", label: "Programs" },
   { href: "/about", label: "About" },
   { href: "/shop", label: "Shop" },
-  { href: "/gallery", label: "Gallery" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -57,7 +58,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors 2xl:text-[11px] ${
+                className={`whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.12em] transition-colors sm:text-xs 2xl:text-sm ${
                   active
                     ? "text-[#0086c9]"
                     : "text-[#222] hover:text-[#ff6a00]"

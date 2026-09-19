@@ -30,9 +30,6 @@ export function Footer() {
             <Link href="/shop" className="hover:text-[var(--neon)]">
               Shop
             </Link>
-            <Link href="/gallery" className="hover:text-[var(--neon)]">
-              Gallery
-            </Link>
             <Link href="/testimonials" className="hover:text-[var(--neon)]">
               Testimonials
             </Link>

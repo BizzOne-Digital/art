@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { SiteBrand } from "@/components/SiteBrand";
+import { introFitnessFacts } from "@/lib/intro-facts";
 import {
   isMusicReady,
   playMusicFromGesture,
@@ -49,7 +50,6 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   function enter() {
     if (leaving) return;
 
-    // CRITICAL: play must run in this click stack (browser autoplay rules)
     playMusicFromGesture();
 
     setLeaving(true);
@@ -89,7 +89,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           tabIndex={0}
           aria-label="Enter site and start music"
           onClick={handleOverlayClick}
-          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[var(--bg)] px-4"
+          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-[var(--bg)] px-4 py-6"
           initial={{ opacity: 1 }}
           animate={{ opacity: leaving ? 0 : 1, y: leaving ? "-6%" : 0 }}
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
@@ -100,41 +100,75 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
           />
 
           <motion.div
-            className="relative z-10 flex w-full max-w-sm flex-col items-center gap-5 sm:max-w-md sm:gap-7"
+            className="relative z-10 flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <SiteBrand size="intro" linked={false} className="justify-center" />
 
-            <div
-              className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
-              onClick={(e) => {
-                e.stopPropagation();
-                unmuteVideo();
-              }}
-            >
-              <video
-                ref={videoRef}
-                className="aspect-video w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
+            <div className="grid w-full gap-5 md:grid-cols-2 md:gap-8 md:items-stretch">
+              <div
+                className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  unmuteVideo();
+                }}
               >
-                <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
-              </video>
-              {!videoUnmuted && (
-                <div
-                  className="pointer-events-none absolute inset-0 flex items-end justify-center bg-black/20 pb-3"
-                  aria-hidden
+                <video
+                  ref={videoRef}
+                  className="aspect-video w-full object-cover md:min-h-full md:aspect-auto md:h-full"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
                 >
-                  <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
-                    Tap video for sound
-                  </span>
+                  <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
+                </video>
+                {!videoUnmuted && (
+                  <div
+                    className="pointer-events-none absolute inset-0 flex items-end justify-center bg-black/20 pb-3"
+                    aria-hidden
+                  >
+                    <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
+                      Tap video for sound
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className="flex flex-col justify-center rounded-2xl border border-white/10 bg-[var(--bg-elevated)]/90 p-5 sm:p-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--neon)] sm:text-xs">
+                  Fitness Facts
+                </p>
+                <div
+                  className="mt-4 max-h-[min(52vh,320px)] space-y-5 overflow-y-auto pr-1 text-sm leading-relaxed sm:max-h-[min(42vh,380px)] sm:text-base md:max-h-none"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {introFitnessFacts.map((fact) => (
+                    <div
+                      key={fact.id}
+                      className="border-l-2 border-[var(--neon)] pl-3"
+                    >
+                      {fact.lead && (
+                        <p className="font-semibold text-white">{fact.lead}</p>
+                      )}
+                      {fact.body.split("\n\n").map((paragraph, index) => (
+                        <p
+                          key={index}
+                          className={`text-[var(--muted)] ${fact.lead ? "mt-2" : ""}`}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
 
             <motion.p

@@ -81,7 +81,7 @@ export function PageHero({
         </Reveal>
         {body && (
           <Reveal direction="up" delay={0.2}>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--muted)] sm:mt-5 sm:text-base md:text-lg">
+            <p className="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-white/90 sm:mt-5 sm:text-lg md:text-xl">
               {body}
             </p>
           </Reveal>

@@ -1,29 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ISSA_BADGE = "/issa-logo-badge.jpg";
-const ISSA_SEAL = "/issa-certified-seal.jpg";
+const ELITE_BODY_LOGO = "/elite-body-logo.png";
+const ISSA_SEAL = "/issa-certified-seal.png";
 
 const sizeStyles = {
   header: {
-    badge: "h-11 w-11 sm:h-12 sm:w-12",
-    seal: "h-11 w-24 sm:h-12 sm:w-28",
-    badgeSizes: "48px",
-    sealSizes: "112px",
+    company: "h-12 w-12 sm:h-14 sm:w-14",
+    seal: "h-12 w-12 sm:h-14 sm:w-14",
+    companySizes: "56px",
+    sealSizes: "56px",
+    companyScale: "scale-[2.1]",
     priority: true,
   },
   footer: {
-    badge: "h-14 w-14 sm:h-16 sm:w-16",
-    seal: "h-14 w-28 sm:h-16 sm:w-32",
-    badgeSizes: "64px",
-    sealSizes: "128px",
+    company: "h-16 w-16 sm:h-20 sm:w-20",
+    seal: "h-16 w-16 sm:h-20 sm:w-20",
+    companySizes: "80px",
+    sealSizes: "80px",
+    companyScale: "scale-[2.1]",
+    priority: false,
+  },
+  page: {
+    company: "h-20 w-20 sm:h-28 sm:w-28",
+    seal: "h-20 w-20 sm:h-28 sm:w-28",
+    companySizes: "112px",
+    sealSizes: "112px",
+    companyScale: "scale-[2.15]",
     priority: false,
   },
   intro: {
-    badge: "h-16 w-16 sm:h-20 sm:w-20",
-    seal: "h-16 w-32 sm:h-20 sm:w-40",
-    badgeSizes: "80px",
-    sealSizes: "160px",
+    company: "h-20 w-20 sm:h-24 sm:w-24",
+    seal: "h-20 w-20 sm:h-24 sm:w-24",
+    companySizes: "96px",
+    sealSizes: "96px",
+    companyScale: "scale-[2.15]",
     priority: true,
   },
 } as const;
@@ -41,20 +52,20 @@ export function SiteBrand({
   const content = (
     <>
       <div
-        className={`relative shrink-0 overflow-hidden ${styles.badge}`}
-        title="ISSA Certified"
+        className={`relative shrink-0 overflow-hidden rounded-full ${styles.company}`}
+        title="Elite Body Fitness Pros"
       >
         <Image
-          src={ISSA_BADGE}
-          alt="ISSA Certified — International Sports Sciences Association"
+          src={ELITE_BODY_LOGO}
+          alt="Elite Body Fitness Pros"
           fill
           priority={styles.priority}
-          sizes={styles.badgeSizes}
-          className="object-contain object-center"
+          sizes={styles.companySizes}
+          className={`object-contain object-center ${styles.companyScale}`}
         />
       </div>
       <div
-        className={`relative shrink-0 ${styles.seal}`}
+        className={`relative shrink-0 overflow-hidden rounded-full bg-transparent ${styles.seal}`}
         title="ISSA Nationally Certified Trainer"
       >
         <Image
@@ -63,13 +74,13 @@ export function SiteBrand({
           fill
           priority={styles.priority}
           sizes={styles.sealSizes}
-          className="object-contain object-left"
+          className="object-contain object-center scale-[1.85]"
         />
       </div>
     </>
   );
 
-  const layoutClass = `flex shrink-0 items-center gap-2 sm:gap-2.5 ${className}`;
+  const layoutClass = `flex shrink-0 items-center gap-3 sm:gap-4 ${className}`;
 
   if (!linked) {
     return <div className={layoutClass}>{content}</div>;

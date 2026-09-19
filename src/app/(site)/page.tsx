@@ -16,6 +16,7 @@ import {
   getServices,
   getGallery,
   getSettings,
+  PRODUCT_IMAGE_CLASS,
 } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ const pillars = [
   },
   {
     icon: ShieldCheck,
-    title: "Form-First Coaching",
+    title: "Form-First Instruction",
     body: "At Elite Body Fitness Pros, we lock in clean technique first — strength and aesthetics follow when movement quality is solid.",
   },
 ];
@@ -84,7 +85,6 @@ const homeQuotes = [
 const marqueeItems = [
   "Elite Body Fitness Pros",
   "Science-Based Training",
-  "Personalized Coaching",
   "Strength & Conditioning",
   "Train With Elite Body Fitness Pros",
   "Mobility & Recovery",
@@ -366,7 +366,9 @@ export default async function HomePage() {
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className={
+                        PRODUCT_IMAGE_CLASS[product.name] || "object-cover"
+                      }
                       sizes="(max-width:768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,6,5,0.75)] to-transparent" />

@@ -137,6 +137,12 @@ const FEATURED_PRODUCT_ORDER = ["Apparel", "Resistance Bands", "Accessories"];
 
 const PRODUCT_IMAGES: Record<string, string> = {
   Accessories: "/accessories-product.jpg",
+  "Resistance Bands": "/accessories-product.jpg",
+};
+
+export const PRODUCT_IMAGE_CLASS: Record<string, string> = {
+  Accessories: "object-cover object-[15%_center]",
+  "Resistance Bands": "object-cover object-[85%_center]",
 };
 
 function applyProductDefaults(products: Product[]): Product[] {
@@ -212,7 +218,9 @@ const GALLERY_ORDER = [
 
 function sortGalleryItems(items: GalleryItem[]): GalleryItem[] {
   return items
-    .filter((item) => item.title !== "Pull Day")
+    .filter(
+      (item) => item.title !== "Pull Day" && item.title !== "Mobility Work"
+    )
     .sort((a, b) => {
       const ai = GALLERY_ORDER.indexOf(a.title);
       const bi = GALLERY_ORDER.indexOf(b.title);
