@@ -1,6 +1,5 @@
 import { IntroWrapper } from "@/components/IntroWrapper";
 import { Navbar } from "@/components/Navbar";
-import { PageBrandBar } from "@/components/PageBrandBar";
 import { Footer } from "@/components/Footer";
 import { DisclaimerBar } from "@/components/DisclaimerBar";
 import { SponsoredBar } from "@/components/SponsoredBar";
@@ -25,7 +24,6 @@ export default async function SiteLayout({
         <DisclaimerBar text={settings.disclaimer} />
         <SponsoredBar />
         <Navbar />
-        <PageBrandBar />
         <PlatinumPromoBar />
         <DiscountCodeBar />
         <main className="flex-1">{children}</main>

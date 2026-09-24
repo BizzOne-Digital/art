@@ -7,8 +7,7 @@ export function Footer() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(184,255,46,0.1),transparent_45%),radial-gradient(ellipse_at_bottom_right,rgba(61,255,181,0.08),transparent_40%),linear-gradient(180deg,#0a100c,#050605)]" />
       <div className="container-site relative grid gap-8 px-4 py-10 sm:gap-10 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-6">
         <div className="min-w-0">
-          <SiteBrand size="footer" />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+          <p className="max-w-sm text-sm leading-relaxed text-[var(--muted)]">
             At Elite Body Fitness Pros, we deliver personalized, science-based
             training that fits your schedule and transforms your results.
           </p>
@@ -60,6 +59,13 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <div className="relative border-t border-[var(--line)] bg-[#0a1628]/80 px-4 py-8 sm:py-10">
+        <div className="container-site flex justify-center">
+          <SiteBrand size="footer" linked={false} className="justify-center" />
+        </div>
+      </div>
+
       <div className="relative border-t border-[var(--line)] px-4 py-5 text-center text-[10px] uppercase tracking-[0.16em] text-[var(--muted)] sm:text-xs sm:tracking-[0.18em]">
         © {new Date().getFullYear()} Elite Body Fitness Pros. All rights
         reserved.
