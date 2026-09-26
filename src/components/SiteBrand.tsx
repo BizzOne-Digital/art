@@ -13,10 +13,11 @@ export const SITE_BRAND_SERVICES =
 
 const sizeStyles = {
   header: {
-    company: "h-[4.635rem] w-[7.21rem] sm:h-[6.18rem] sm:w-[9.27rem]",
-    seal: "h-[4.12rem] w-[4.12rem] sm:h-[5.15rem] sm:w-[5.15rem]",
-    companySizes: "148px",
-    sealSizes: "82px",
+    company:
+      "h-[4.774rem] w-[7.426rem] sm:h-[6.365rem] sm:w-[9.548rem]",
+    seal: "h-[4.244rem] w-[4.244rem] sm:h-[5.305rem] sm:w-[5.305rem]",
+    companySizes: "152px",
+    sealSizes: "85px",
     priority: true,
   },
   footer: {
@@ -43,7 +44,7 @@ const sizeStyles = {
   },
 } as const;
 
-/** Navbar header logos (+3% vs original 4.5rem / 4rem baselines). */
+/** Navbar header logos (+6% cumulative vs original 4.5rem / 4rem baselines). */
 export const headerBrandLogoBox = sizeStyles.header.company;
 export const headerIssaLogoBox = sizeStyles.header.seal;
 export const headerBrandLogoSizes = sizeStyles.header.companySizes;
@@ -51,7 +52,7 @@ export const headerIssaLogoSizes = sizeStyles.header.sealSizes;
 
 /** Compact header logo for phone screens. */
 export const headerBrandLogoBoxMobile =
-  "max-sm:h-[3.65rem] max-sm:w-[5.65rem]";
+  "max-sm:h-[3.76rem] max-sm:w-[5.82rem]";
 
 type SiteBrandSize = keyof typeof sizeStyles;
 
@@ -89,9 +90,9 @@ const centerCopyClassBySize: Record<
   },
   header: {
     title:
-      "mx-auto max-w-[17rem] text-balance font-display text-[0.58rem] font-bold uppercase leading-snug tracking-[0.06em] text-white sm:max-w-none sm:text-base sm:leading-tight md:text-lg lg:text-xl",
+      "mx-auto max-w-[18rem] text-balance font-display text-[0.62rem] font-bold uppercase leading-snug tracking-[0.06em] text-white sm:max-w-none sm:text-lg sm:leading-tight md:text-xl lg:text-2xl",
     services:
-      "mt-1.5 max-w-[17rem] text-[6px] font-semibold uppercase leading-snug tracking-[0.1em] text-[var(--neon)] sm:mt-1 sm:max-w-xl sm:text-[9px] sm:tracking-[0.12em] md:text-[10px]",
+      "mt-1.5 max-w-[18rem] text-[7px] font-semibold uppercase leading-snug tracking-[0.1em] text-[var(--neon)] sm:mt-1.5 sm:max-w-2xl sm:text-[10px] sm:tracking-[0.12em] md:text-xs",
   },
   page: {
     title:
