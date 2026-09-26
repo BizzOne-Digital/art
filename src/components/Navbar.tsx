@@ -43,29 +43,31 @@ export function Navbar() {
     return () => document.body.classList.remove("menu-open");
   }, [open]);
 
-  const brandLogoLink = (
-    <Link
-      href="/"
-      className={`relative shrink-0 ${headerBrandLogoBox} ${headerBrandLogoBoxMobile}`}
-      aria-label="Elite Body Fitness Pros home"
-    >
-      <Image
-        src={ELITE_BODY_BRAND_LOGO}
-        alt="Elite Body Fitness Pros"
-        fill
-        priority
-        sizes={headerBrandLogoSizes}
-        className="object-contain object-left"
-      />
-    </Link>
-  );
+  function BrandLogoLink() {
+    return (
+      <Link
+        href="/"
+        className={`relative block shrink-0 ${headerBrandLogoBox} ${headerBrandLogoBoxMobile}`}
+        aria-label="Elite Body Fitness Pros home"
+      >
+        <Image
+          src={ELITE_BODY_BRAND_LOGO}
+          alt="Elite Body Fitness Pros"
+          fill
+          priority
+          sizes={headerBrandLogoSizes}
+          className="object-contain object-left"
+        />
+      </Link>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(0,180,255,0.25)] bg-[#0a1628] shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
       <div className="container-site relative px-3 py-2.5 sm:px-5 sm:py-4 md:px-6">
         <div className="flex flex-col gap-2 sm:hidden">
           <div className="flex items-center justify-between gap-2">
-            {brandLogoLink}
+            <BrandLogoLink />
             <button
               type="button"
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-white/20 text-white"
@@ -85,14 +87,14 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="relative hidden min-h-[5.75rem] w-full items-center sm:flex md:min-h-[6.25rem]">
-          <div className="relative z-20 shrink-0">{brandLogoLink}</div>
+        <div className="hidden min-h-[5.75rem] w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:grid md:min-h-[6.25rem] md:gap-4">
+          <div className="flex min-w-0 justify-start">
+            <BrandLogoLink />
+          </div>
 
-          <div
-            className="pointer-events-none absolute inset-y-0 left-1/2 z-10 flex w-full max-w-[min(100%,48rem)] -translate-x-1/2 flex-col items-center justify-center px-28 text-center md:px-36 lg:max-w-3xl lg:px-44"
-          >
+          <div className="flex min-w-0 flex-col items-center justify-center px-1 text-center sm:px-2">
             <nav
-              className="pointer-events-auto mb-1 hidden max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 xl:flex 2xl:gap-x-3"
+              className="mb-1 hidden max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 xl:flex 2xl:gap-x-3"
               aria-label="Main"
             >
               {links.map((link) => {
@@ -112,16 +114,14 @@ export function Navbar() {
                 );
               })}
             </nav>
-            <div className="pointer-events-auto w-full">
-              <SiteBrandCenterCopy
-                size="header"
-                headline={SITE_BRAND_NAME}
-                sideLines="always"
-              />
-            </div>
+            <SiteBrandCenterCopy
+              size="header"
+              headline={SITE_BRAND_NAME}
+              sideLines="always"
+            />
           </div>
 
-          <div className="relative z-20 ml-auto flex shrink-0 items-center gap-2">
+          <div className="flex min-w-0 items-center justify-end gap-2">
             <div className="relative hidden flex-col items-center sm:flex">
               <Link
                 href="/pricing"
