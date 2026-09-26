@@ -11,7 +11,6 @@ import {
   headerBrandLogoBoxMobile,
   headerBrandLogoSizes,
   headerIssaLogoBox,
-  headerIssaLogoBoxMobile,
   headerIssaLogoSizes,
   ISSA_CERTIFIED_BADGE,
   SITE_BRAND_NAME,
@@ -44,11 +43,16 @@ export function Navbar() {
     return () => document.body.classList.remove("menu-open");
   }, [open]);
 
-  function BrandLogoLink() {
+  function BrandLogoLink({ layout }: { layout: "mobile" | "desktop" }) {
+    const sizeClass =
+      layout === "mobile"
+        ? headerBrandLogoBoxMobile
+        : headerBrandLogoBox;
+
     return (
       <Link
         href="/"
-        className={`relative block shrink-0 ${headerBrandLogoBox} ${headerBrandLogoBoxMobile}`}
+        className={`relative block shrink-0 ${sizeClass}`}
         aria-label="Elite Body Fitness Pros home"
       >
         <Image
@@ -68,7 +72,7 @@ export function Navbar() {
       <div className="container-site relative px-3 py-2.5 sm:px-5 sm:py-4 md:px-6">
         <div className="flex flex-col gap-2 sm:hidden">
           <div className="flex items-center justify-between gap-2">
-            <BrandLogoLink />
+            <BrandLogoLink layout="mobile" />
             <button
               type="button"
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-white/20 text-white"
@@ -88,9 +92,9 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="hidden min-h-[6rem] w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:grid md:min-h-[6.85rem] md:gap-4">
+        <div className="hidden min-h-[6.35rem] w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:grid md:min-h-[7.35rem] md:gap-4">
           <div className="flex min-w-0 justify-start">
-            <BrandLogoLink />
+            <BrandLogoLink layout="desktop" />
           </div>
 
           <div className="flex min-w-0 flex-col items-center justify-center px-1 text-center sm:px-2">
@@ -123,9 +127,7 @@ export function Navbar() {
           </div>
 
           <div className="flex min-w-0 items-center justify-end gap-2">
-            <div
-              className={`relative hidden shrink-0 sm:block ${headerIssaLogoBox} ${headerIssaLogoBoxMobile}`}
-            >
+            <div className={`relative hidden shrink-0 sm:block ${headerIssaLogoBox}`}>
               <Image
                 src={ISSA_CERTIFIED_BADGE}
                 alt="ISSA Certified"
