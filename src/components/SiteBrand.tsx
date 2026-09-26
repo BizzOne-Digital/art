@@ -63,7 +63,7 @@ const centerCopyClassBySize: Record<
   },
   footer: {
     title:
-      "whitespace-nowrap font-display text-[0.7rem] font-bold leading-tight tracking-[0.06em] text-white sm:text-base md:text-lg lg:text-xl",
+      "text-balance font-display text-[0.7rem] font-bold leading-tight tracking-[0.06em] text-white sm:whitespace-nowrap sm:text-base md:text-lg lg:text-xl",
     services:
       "mt-1 max-w-xl text-[8px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:text-[9px] md:text-[10px]",
   },
@@ -84,7 +84,7 @@ const centerCopyClassBySize: Record<
 function SiteBrandCenterCopy({
   size,
   headline,
-  sideLines = size === "footer" ? "always" : "sm",
+  sideLines = size === "footer" || size === "intro" ? "always" : "sm",
 }: {
   size: SiteBrandSize;
   headline: string;
@@ -97,13 +97,15 @@ function SiteBrandCenterCopy({
       : "hidden h-px min-w-4 flex-1 bg-white/35 sm:block";
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col items-center px-1 text-center sm:px-2">
-      <div className="flex w-full max-w-2xl items-center gap-2 sm:gap-4">
+    <div className="flex w-full flex-col items-center px-1 text-center sm:px-2">
+      <div className="flex w-full max-w-2xl items-center justify-center gap-2 sm:gap-4">
         <span className={lineClass} aria-hidden />
-        <p className={copy.title}>{headline}</p>
+        <p className={`text-center ${copy.title}`}>{headline}</p>
         <span className={lineClass} aria-hidden />
       </div>
-      <p className={copy.services}>{SITE_BRAND_SERVICES}</p>
+      <p className={`mx-auto w-full text-center ${copy.services}`}>
+        {SITE_BRAND_SERVICES}
+      </p>
     </div>
   );
 }
@@ -159,7 +161,7 @@ export function SiteBrand({
   );
 
   if (layout === "spread-tagline") {
-    const spreadClass = `flex w-full items-center justify-between gap-3 sm:gap-6 ${className}`;
+    const spreadClass = `grid w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:gap-4 ${className}`;
     const headline =
       centerHeadline ?? (size === "footer" ? SITE_BRAND_NAME : tagline);
     const taglineEl = (
@@ -169,22 +171,30 @@ export function SiteBrand({
     if (!linked) {
       return (
         <div className={spreadClass}>
-          {companyLogo}
-          {taglineEl}
-          {sealLogo}
+          <div className="flex min-w-0 justify-start">{companyLogo}</div>
+          <div className="z-10 min-w-0 justify-self-center px-1 sm:px-2">
+            {taglineEl}
+          </div>
+          <div className="flex min-w-0 justify-end">{sealLogo}</div>
         </div>
       );
     }
 
     return (
       <div className={spreadClass}>
-        <Link href="/" aria-label="Elite Body Fitness Pros home" className="shrink-0">
-          {companyLogo}
-        </Link>
-        {taglineEl}
-        <Link href="/" aria-label="ISSA certification" className="shrink-0">
-          {sealLogo}
-        </Link>
+        <div className="flex min-w-0 justify-start">
+          <Link href="/" aria-label="Elite Body Fitness Pros home" className="shrink-0">
+            {companyLogo}
+          </Link>
+        </div>
+        <div className="z-10 min-w-0 justify-self-center px-1 sm:px-2">
+          {taglineEl}
+        </div>
+        <div className="flex min-w-0 justify-end">
+          <Link href="/" aria-label="ISSA certification" className="shrink-0">
+            {sealLogo}
+          </Link>
+        </div>
       </div>
     );
   }

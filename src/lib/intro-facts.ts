@@ -26,6 +26,6 @@ export const introFitnessFacts: IntroFitnessFact[] = [
     id: "fix",
     lead: "The fix is almost boring.",
     body:
-      "Train each major muscle group roughly twice a week, with at least 48 hours between sessions hitting it directly. That's it. That's the whole adjustment.",
+      "Train each major muscle group roughly once or twice a week, with at least 48 hours between sessions hitting it directly. That's it. That's the whole adjustment.",
   },
 ];

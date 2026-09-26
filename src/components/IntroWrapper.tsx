@@ -188,7 +188,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             )}
 
             <motion.p
-              className="mt-4 shrink-0 pb-2 text-center text-xs font-semibold uppercase tracking-[0.28em] text-white/90 sm:mt-6 sm:text-sm"
+              className="mt-4 w-full shrink-0 pb-2 text-center text-xs font-semibold uppercase tracking-[0.28em] text-white/90 sm:mt-6 sm:text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
