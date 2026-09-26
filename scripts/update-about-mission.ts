@@ -21,6 +21,22 @@ async function main() {
   mission.title = "Our Mission";
   mission.subtitle = "Mission Statement";
   mission.body = missionBody;
+  if (!mission.image) {
+    mission.image =
+      "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80";
+  }
+
+  const approach = page.sections.find((s) => s.key === "approach");
+  if (approach && !approach.image) {
+    approach.image =
+      "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80";
+  }
+
+  const hero = page.sections.find((s) => s.key === "hero");
+  if (hero && !hero.image) {
+    hero.image =
+      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1600&q=80";
+  }
   page.markModified("sections");
   await page.save();
 

@@ -8,12 +8,13 @@ import { Menu, X } from "lucide-react";
 import {
   ELITE_BODY_BRAND_LOGO,
   headerBrandLogoBox,
+  headerBrandLogoBoxMobile,
   headerBrandLogoSizes,
   headerIssaLogoBox,
   headerIssaLogoSizes,
   ISSA_CERTIFIED_BADGE,
   SITE_BRAND_NAME,
-  SITE_BRAND_SERVICES,
+  SiteBrandCenterCopy,
 } from "@/components/SiteBrand";
 
 const links = [
@@ -42,26 +43,50 @@ export function Navbar() {
     return () => document.body.classList.remove("menu-open");
   }, [open]);
 
+  const brandLogoLink = (
+    <Link
+      href="/"
+      className={`relative shrink-0 ${headerBrandLogoBox} ${headerBrandLogoBoxMobile}`}
+      aria-label="Elite Body Fitness Pros home"
+    >
+      <Image
+        src={ELITE_BODY_BRAND_LOGO}
+        alt="Elite Body Fitness Pros"
+        fill
+        priority
+        sizes={headerBrandLogoSizes}
+        className="object-contain object-left"
+      />
+    </Link>
+  );
+
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(0,180,255,0.25)] bg-[#0a1628] shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
-      <div className="container-site px-3 py-3 sm:px-5 sm:py-4 md:px-6">
-        <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-          <Link
-            href="/"
-            className={`relative shrink-0 ${headerBrandLogoBox}`}
-            aria-label="Elite Body Fitness Pros home"
-          >
-            <Image
-              src={ELITE_BODY_BRAND_LOGO}
-              alt="Elite Body Fitness Pros"
-              fill
-              priority
-              sizes={headerBrandLogoSizes}
-              className="object-contain object-left"
-            />
-          </Link>
+      <div className="container-site px-3 py-2.5 sm:px-5 sm:py-4 md:px-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4 lg:gap-6">
+          <div className="flex items-center justify-between gap-2 sm:contents">
+            {brandLogoLink}
 
-          <div className="flex min-w-0 flex-1 flex-col items-center text-center">
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-white/20 text-white sm:order-last xl:hidden"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+
+          <div className="w-full min-w-0 sm:hidden">
+            <SiteBrandCenterCopy
+              size="header"
+              headline={SITE_BRAND_NAME}
+              sideLines="sm"
+            />
+          </div>
+
+          <div className="hidden min-w-0 flex-1 flex-col items-center text-center sm:flex">
             <nav
               className="hidden max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 xl:flex 2xl:gap-x-3"
               aria-label="Main"
@@ -84,25 +109,11 @@ export function Navbar() {
               })}
             </nav>
 
-            <div className="mt-0 flex w-full max-w-2xl items-center gap-2 sm:mt-2 sm:gap-4">
-              <span
-                className="hidden h-px min-w-4 flex-1 bg-white/35 sm:block"
-                aria-hidden
-              />
-              <p
-                className="font-display text-[0.7rem] font-bold leading-tight tracking-[0.06em] text-white sm:text-base md:text-lg lg:text-xl"
-              >
-                {SITE_BRAND_NAME}
-              </p>
-              <span
-                className="hidden h-px min-w-4 flex-1 bg-white/35 sm:block"
-                aria-hidden
-              />
-            </div>
-
-            <p className="mt-1 hidden max-w-xl text-[8px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:block sm:text-[9px] md:text-[10px]">
-              {SITE_BRAND_SERVICES}
-            </p>
+            <SiteBrandCenterCopy
+              size="header"
+              headline={SITE_BRAND_NAME}
+              sideLines="sm"
+            />
           </div>
 
           <div className="relative hidden shrink-0 flex-col items-center sm:flex">
@@ -122,16 +133,6 @@ export function Navbar() {
               />
             </div>
           </div>
-
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center border border-white/20 text-white xl:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
       </div>
 

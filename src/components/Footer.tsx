@@ -5,8 +5,8 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-[var(--line)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(184,255,46,0.1),transparent_45%),radial-gradient(ellipse_at_bottom_right,rgba(61,255,181,0.08),transparent_40%),linear-gradient(180deg,#0a100c,#050605)]" />
-      <div className="container-site relative grid gap-8 px-4 py-10 sm:gap-10 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-6">
-        <div className="min-w-0">
+      <div className="container-site relative grid gap-8 px-4 py-8 sm:gap-10 sm:py-14 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr] md:px-6">
+        <div className="min-w-0 sm:col-span-2 md:col-span-1">
           <p className="max-w-sm text-sm leading-relaxed text-[var(--muted)]">
             At Elite Body Fitness Pros, we deliver personalized, science-based
             training that fits your schedule and transforms your results.
@@ -60,8 +60,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-[var(--line)] bg-[#0a1628]/80 px-4 py-8 sm:py-10">
-        <div className="container-site">
+      <div className="relative border-t border-[var(--line)] bg-[#0a1628]/80 px-3 py-6 sm:px-4 sm:py-8 md:py-10">
+        <div className="container-site max-sm:overflow-hidden">
           <SiteBrand
             size="footer"
             linked={false}
@@ -72,7 +72,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-[var(--line)] px-4 py-5 text-center text-[10px] uppercase tracking-[0.16em] text-[var(--muted)] sm:text-xs sm:tracking-[0.18em]">
+      <div className="relative border-t border-[var(--line)] px-3 py-4 text-center text-[9px] uppercase leading-relaxed tracking-[0.14em] text-[var(--muted)] sm:px-4 sm:py-5 sm:text-xs sm:leading-normal sm:tracking-[0.18em]">
         © {new Date().getFullYear()} Elite Body Fitness Pros. All rights
         reserved.
       </div>

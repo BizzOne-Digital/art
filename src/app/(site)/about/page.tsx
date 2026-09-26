@@ -6,6 +6,15 @@ import { Reveal } from "@/components/Reveal";
 import { FallingRocks } from "@/components/FallingRocks";
 import { getPage } from "@/lib/data";
 
+const ABOUT_IMAGES = {
+  hero:
+    "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1600&q=80",
+  mission:
+    "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
+  approach:
+    "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80",
+} as const;
+
 export const metadata: Metadata = {
   title: "About Elite Body Fitness Pros",
   description:
@@ -18,13 +27,19 @@ export default async function AboutPage() {
   const mission = page?.sections.find((s) => s.key === "mission");
   const approach = page?.sections.find((s) => s.key === "approach");
 
+  const heroImage = hero?.image || ABOUT_IMAGES.hero;
+  const missionImage = mission?.image || ABOUT_IMAGES.mission;
+  const approachImage = approach?.image || ABOUT_IMAGES.approach;
+  const missionTitle = mission?.title || "Our Mission";
+  const approachTitle = approach?.title || "What We Stand For";
+
   return (
     <>
       <PageHero
         eyebrow={hero?.subtitle}
         title={hero?.title || "About Elite Body Fitness Pros"}
         body={hero?.body}
-        image={hero?.image}
+        image={heroImage}
       />
 
       <section className="section-pad relative overflow-hidden">
@@ -33,16 +48,14 @@ export default async function AboutPage() {
         </div>
         <div className="container-site relative grid items-center gap-8 md:grid-cols-2 md:gap-12">
           <Reveal direction="left">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              {mission?.image && (
-                <Image
-                  src={mission.image}
-                  alt={`${mission.title} — Elite Body Fitness Pros`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:768px) 100vw, 50vw"
-                />
-              )}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
+              <Image
+                src={missionImage}
+                alt={`${missionTitle} — Elite Body Fitness Pros`}
+                fill
+                className="object-cover"
+                sizes="(max-width:768px) 100vw, 50vw"
+              />
             </div>
           </Reveal>
           <Reveal direction="right">
@@ -72,16 +85,14 @@ export default async function AboutPage() {
       <section className="section-pad border-t border-[var(--line)] bg-[var(--bg-elevated)]">
         <div className="container-site grid items-center gap-8 md:grid-cols-2 md:gap-12">
           <Reveal direction="left" className="md:order-2">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              {approach?.image && (
-                <Image
-                  src={approach.image}
-                  alt={`${approach.title} — Elite Body Fitness Pros`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:768px) 100vw, 50vw"
-                />
-              )}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
+              <Image
+                src={approachImage}
+                alt={`${approachTitle} — Elite Body Fitness Pros`}
+                fill
+                className="object-cover"
+                sizes="(max-width:768px) 100vw, 50vw"
+              />
             </div>
           </Reveal>
           <Reveal direction="right" className="md:order-1">
