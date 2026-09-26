@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SiteBrand } from "@/components/SiteBrand";
+import { SITE_BRAND_NAME, SiteBrand } from "@/components/SiteBrand";
 
 export function Footer() {
   return (
@@ -66,7 +66,8 @@ export function Footer() {
             size="footer"
             linked={false}
             layout="spread-tagline"
-            className="w-full"
+            centerHeadline={SITE_BRAND_NAME}
+            className="w-full items-center"
           />
         </div>
       </div>

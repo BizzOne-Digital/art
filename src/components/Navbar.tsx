@@ -5,7 +5,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ELITE_BODY_BRAND_LOGO, ISSA_CERTIFIED_BADGE } from "@/components/SiteBrand";
+import {
+  ELITE_BODY_BRAND_LOGO,
+  headerBrandLogoBox,
+  headerBrandLogoSizes,
+  headerIssaLogoBox,
+  headerIssaLogoSizes,
+  ISSA_CERTIFIED_BADGE,
+  SITE_BRAND_NAME,
+  SITE_BRAND_SERVICES,
+} from "@/components/SiteBrand";
 
 const links = [
   { href: "/", label: "Home" },
@@ -39,7 +48,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
           <Link
             href="/"
-            className="relative h-[4.3775rem] w-[6.695rem] shrink-0 sm:h-[6.18rem] sm:w-[9.27rem]"
+            className={`relative shrink-0 ${headerBrandLogoBox}`}
             aria-label="Elite Body Fitness Pros home"
           >
             <Image
@@ -47,7 +56,7 @@ export function Navbar() {
               alt="Elite Body Fitness Pros"
               fill
               priority
-              sizes="(max-width:640px) 124px, 148px"
+              sizes={headerBrandLogoSizes}
               className="object-contain object-left"
             />
           </Link>
@@ -83,7 +92,7 @@ export function Navbar() {
               <p
                 className="font-display text-[0.7rem] font-bold leading-tight tracking-[0.06em] text-white sm:text-base md:text-lg lg:text-xl"
               >
-                ELITE BODY FITNESS PROS
+                {SITE_BRAND_NAME}
               </p>
               <span
                 className="hidden h-px min-w-4 flex-1 bg-white/35 sm:block"
@@ -92,7 +101,7 @@ export function Navbar() {
             </div>
 
             <p className="mt-1 hidden max-w-xl text-[8px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:block sm:text-[9px] md:text-[10px]">
-              Personal Training • Nutrition Coaching • ISSA Certified
+              {SITE_BRAND_SERVICES}
             </p>
           </div>
 
@@ -103,12 +112,12 @@ export function Navbar() {
             >
               Start Now
             </Link>
-            <div className="relative h-[3.605rem] w-[3.605rem] sm:h-[4.635rem] sm:w-[4.635rem] md:h-[5.15rem] md:w-[5.15rem]">
+            <div className={`relative ${headerIssaLogoBox}`}>
               <Image
                 src={ISSA_CERTIFIED_BADGE}
                 alt="ISSA Certified"
                 fill
-                sizes="82px"
+                sizes={headerIssaLogoSizes}
                 className="object-contain"
               />
             </div>

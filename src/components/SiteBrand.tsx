@@ -4,7 +4,12 @@ import Link from "next/link";
 export const ELITE_BODY_BRAND_LOGO = "/elite-body-brand.jpg";
 export const ISSA_CERTIFIED_BADGE = "/issa-certified-badge.jpg";
 
+export const SITE_BRAND_NAME = "ELITE BODY FITNESS PROS";
+
 export const SITE_BRAND_TAGLINE = "Unleash the strongest version of you";
+
+export const SITE_BRAND_SERVICES =
+  "Personal Training • Nutrition Coaching • ISSA Certified";
 
 const sizeStyles = {
   header: {
@@ -38,16 +43,70 @@ const sizeStyles = {
   },
 } as const;
 
-const taglineClassBySize: Record<keyof typeof sizeStyles, string> = {
-  intro:
-    "font-display text-sm font-semibold leading-snug tracking-[0.04em] text-white sm:text-base md:text-lg",
-  footer:
-    "font-display text-xs font-semibold leading-snug tracking-[0.04em] text-white sm:text-sm md:text-base",
-  header:
-    "font-display text-[10px] font-semibold leading-snug tracking-[0.04em] text-white sm:text-xs",
-  page:
-    "font-display text-sm font-semibold leading-snug tracking-[0.04em] text-white sm:text-base",
+/** Navbar header logos (+3% vs original 4.5rem / 4rem baselines). */
+export const headerBrandLogoBox = sizeStyles.header.company;
+export const headerIssaLogoBox = sizeStyles.header.seal;
+export const headerBrandLogoSizes = sizeStyles.header.companySizes;
+export const headerIssaLogoSizes = sizeStyles.header.sealSizes;
+
+type SiteBrandSize = keyof typeof sizeStyles;
+
+const centerCopyClassBySize: Record<
+  SiteBrandSize,
+  { title: string; services: string }
+> = {
+  intro: {
+    title:
+      "max-w-[11rem] text-balance font-display text-[0.62rem] font-bold uppercase leading-tight tracking-[0.08em] text-white sm:max-w-none sm:text-sm md:text-base lg:text-xl",
+    services:
+      "mt-1 max-w-xl text-[7px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:text-[8px] md:text-[10px]",
+  },
+  footer: {
+    title:
+      "whitespace-nowrap font-display text-[0.7rem] font-bold leading-tight tracking-[0.06em] text-white sm:text-base md:text-lg lg:text-xl",
+    services:
+      "mt-1 max-w-xl text-[8px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:text-[9px] md:text-[10px]",
+  },
+  header: {
+    title:
+      "font-display text-[0.7rem] font-bold uppercase leading-tight tracking-[0.06em] text-white sm:text-base md:text-lg lg:text-xl",
+    services:
+      "mt-1 max-w-xl text-[8px] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--neon)] sm:text-[9px] md:text-[10px]",
+  },
+  page: {
+    title:
+      "font-display text-sm font-bold uppercase leading-tight tracking-[0.06em] text-white sm:text-base",
+    services:
+      "mt-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-[var(--neon)] sm:text-[10px]",
+  },
 };
+
+function SiteBrandCenterCopy({
+  size,
+  headline,
+  sideLines = size === "footer" ? "always" : "sm",
+}: {
+  size: SiteBrandSize;
+  headline: string;
+  sideLines?: "always" | "sm";
+}) {
+  const copy = centerCopyClassBySize[size];
+  const lineClass =
+    sideLines === "always"
+      ? "h-px min-w-3 flex-1 bg-white/35"
+      : "hidden h-px min-w-4 flex-1 bg-white/35 sm:block";
+
+  return (
+    <div className="flex min-w-0 flex-1 flex-col items-center px-1 text-center sm:px-2">
+      <div className="flex w-full max-w-2xl items-center gap-2 sm:gap-4">
+        <span className={lineClass} aria-hidden />
+        <p className={copy.title}>{headline}</p>
+        <span className={lineClass} aria-hidden />
+      </div>
+      <p className={copy.services}>{SITE_BRAND_SERVICES}</p>
+    </div>
+  );
+}
 
 export function SiteBrand({
   size = "header",
@@ -55,12 +114,15 @@ export function SiteBrand({
   className = "",
   layout = "row",
   tagline = SITE_BRAND_TAGLINE,
+  centerHeadline,
 }: {
   size?: keyof typeof sizeStyles;
   linked?: boolean;
   className?: string;
   layout?: "row" | "column" | "spread-tagline";
   tagline?: string;
+  /** Main center title for spread layout (footer uses brand name like header). */
+  centerHeadline?: string;
 }) {
   const styles = sizeStyles[size];
 
@@ -98,10 +160,10 @@ export function SiteBrand({
 
   if (layout === "spread-tagline") {
     const spreadClass = `flex w-full items-center justify-between gap-3 sm:gap-6 ${className}`;
+    const headline =
+      centerHeadline ?? (size === "footer" ? SITE_BRAND_NAME : tagline);
     const taglineEl = (
-      <p className={`min-w-0 flex-1 px-2 text-center ${taglineClassBySize[size]}`}>
-        {tagline}
-      </p>
+      <SiteBrandCenterCopy size={size} headline={headline} />
     );
 
     if (!linked) {
