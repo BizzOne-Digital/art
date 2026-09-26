@@ -122,22 +122,14 @@ export function Navbar() {
           </div>
 
           <div className="flex min-w-0 items-center justify-end gap-2">
-            <div className="relative hidden flex-col items-center sm:flex">
-              <Link
-                href="/pricing"
-                className="glow-btn relative z-10 mb-1 hidden !min-h-8 !px-3 !py-1.5 text-[9px] sm:inline-flex md:text-[10px]"
-              >
-                Start Now
-              </Link>
-              <div className={`relative ${headerIssaLogoBox}`}>
-                <Image
-                  src={ISSA_CERTIFIED_BADGE}
-                  alt="ISSA Certified"
-                  fill
-                  sizes={headerIssaLogoSizes}
-                  className="object-contain"
-                />
-              </div>
+            <div className={`relative hidden shrink-0 sm:block ${headerIssaLogoBox}`}>
+              <Image
+                src={ISSA_CERTIFIED_BADGE}
+                alt="ISSA Certified"
+                fill
+                sizes={headerIssaLogoSizes}
+                className="object-contain"
+              />
             </div>
             <button
               type="button"
