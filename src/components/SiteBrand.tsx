@@ -14,10 +14,10 @@ export const SITE_BRAND_SERVICES =
 const sizeStyles = {
   header: {
     company:
-      "h-[4.917rem] w-[7.649rem] sm:h-[6.556rem] sm:w-[9.834rem]",
-    seal: "h-[4.371rem] w-[4.371rem] sm:h-[5.464rem] sm:w-[5.464rem]",
-    companySizes: "157px",
-    sealSizes: "88px",
+      "h-[5.065rem] w-[7.878rem] sm:h-[6.753rem] sm:w-[10.129rem]",
+    seal: "h-[4.502rem] w-[4.502rem] sm:h-[5.628rem] sm:w-[5.628rem]",
+    companySizes: "162px",
+    sealSizes: "91px",
     priority: true,
   },
   footer: {
@@ -52,7 +52,11 @@ export const headerIssaLogoSizes = sizeStyles.header.sealSizes;
 
 /** Compact header logo for phone screens. */
 export const headerBrandLogoBoxMobile =
-  "max-sm:h-[3.873rem] max-sm:w-[5.995rem]";
+  "max-sm:h-[3.989rem] max-sm:w-[6.175rem]";
+
+/** Header ISSA seal sizing matches `sizeStyles.header.seal`. */
+export const headerIssaLogoBoxMobile =
+  "max-sm:h-[4.502rem] max-sm:w-[4.502rem]";
 
 type SiteBrandSize = keyof typeof sizeStyles;
 

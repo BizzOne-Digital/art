@@ -11,6 +11,7 @@ import {
   headerBrandLogoBoxMobile,
   headerBrandLogoSizes,
   headerIssaLogoBox,
+  headerIssaLogoBoxMobile,
   headerIssaLogoSizes,
   ISSA_CERTIFIED_BADGE,
   SITE_BRAND_NAME,
@@ -87,7 +88,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="hidden min-h-[5.75rem] w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:grid md:min-h-[6.25rem] md:gap-4">
+        <div className="hidden min-h-[6rem] w-full grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] items-center gap-2 sm:grid md:min-h-[6.85rem] md:gap-4">
           <div className="flex min-w-0 justify-start">
             <BrandLogoLink />
           </div>
@@ -122,7 +123,9 @@ export function Navbar() {
           </div>
 
           <div className="flex min-w-0 items-center justify-end gap-2">
-            <div className={`relative hidden shrink-0 sm:block ${headerIssaLogoBox}`}>
+            <div
+              className={`relative hidden shrink-0 sm:block ${headerIssaLogoBox} ${headerIssaLogoBoxMobile}`}
+            >
               <Image
                 src={ISSA_CERTIFIED_BADGE}
                 alt="ISSA Certified"
