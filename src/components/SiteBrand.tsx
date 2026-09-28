@@ -84,7 +84,7 @@ const centerCopyClassBySize: Record<
   },
   footer: {
     title:
-      "mx-auto w-full max-w-[18rem] text-balance font-display text-[0.56rem] font-bold leading-snug tracking-[0.05em] text-white sm:max-w-none sm:whitespace-nowrap sm:text-base sm:leading-tight sm:tracking-[0.06em] md:text-lg lg:text-xl",
+      "mx-auto w-full max-w-[18rem] text-balance font-display text-[0.56rem] font-bold uppercase leading-snug tracking-[0.05em] text-white sm:max-w-2xl sm:text-base sm:leading-tight sm:tracking-[0.06em] md:text-lg lg:text-xl",
     services:
       "mt-2 w-full max-w-[18rem] px-1 text-[6px] font-semibold uppercase leading-[1.45] tracking-[0.08em] text-[var(--neon)] sm:mt-1 sm:max-w-xl sm:px-0 sm:text-[8px] sm:leading-snug sm:tracking-[0.12em] md:text-[9px] lg:text-[10px]",
   },
@@ -185,7 +185,7 @@ export function SiteBrand({
   if (layout === "spread-tagline") {
     const spreadClass = `grid w-full grid-cols-2 items-center gap-x-2 gap-y-2.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,auto)_minmax(0,1fr)] sm:gap-4 ${className}`;
     const headline =
-      centerHeadline ?? (size === "footer" ? SITE_BRAND_NAME : tagline);
+      centerHeadline ?? (size === "footer" ? SITE_BRAND_TAGLINE : tagline);
     const taglineEl = (
       <SiteBrandCenterCopy size={size} headline={headline} sideLines="sm" />
     );
