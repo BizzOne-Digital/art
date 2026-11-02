@@ -16,7 +16,7 @@ const OrderSchema = new Schema(
     productName: { type: String },
     service: { type: String },
     preferredDate: { type: String },
-    stripeSessionId: { type: String },
+    stripeSessionId: { type: String, index: true, sparse: true },
     paymentStatus: { type: String },
     amountTotalCents: { type: Number },
     status: {

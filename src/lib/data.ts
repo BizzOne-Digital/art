@@ -358,6 +358,15 @@ export async function createOrder(order: Order): Promise<Order> {
   return lean<Order>(created);
 }
 
+export async function getOrderByStripeSessionId(
+  stripeSessionId: string
+): Promise<Order | null> {
+  await connectDB();
+  const order = await OrderModel.findOne({ stripeSessionId }).lean();
+  if (!order) return null;
+  return lean<Order>(order);
+}
+
 export async function updateOrderStatus(
   id: string,
   status: Order["status"]

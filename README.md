@@ -79,6 +79,24 @@ Set these in `.env.local` and on Vercel:
 
 Webhook endpoint: `POST /api/webhooks/stripe` — subscribe to **checkout.session.completed** in the Stripe Dashboard.
 
+## Purchase emails (SMTP)
+
+On successful Stripe payment, the webhook sends:
+
+- **Owner** — package name, amount, discount, customer name/email/phone
+- **Customer** — thank-you confirmation with package summary
+
+Configure Gmail App Password in `.env.local` and Vercel:
+
+| Variable | Example |
+| --- | --- |
+| `SMTP_HOST` | `smtp.gmail.com` |
+| `SMTP_PORT` | `587` |
+| `SMTP_USER` | `elitebodyfitnesspros7@gmail.com` |
+| `SMTP_PASS` | Gmail **App Password** (16 chars, no spaces) |
+| `SMTP_FROM` | same as `SMTP_USER` |
+| `OWNER_EMAIL` | inbox for new-purchase alerts |
+
 Checkout flow uses **Redux Toolkit + redux-saga** (`src/store/checkout/`).
 
 ## Stack

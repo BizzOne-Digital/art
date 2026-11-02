@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
-import { createOrder } from "@/lib/data";
+import { createOrder, getOrderByStripeSessionId } from "@/lib/data";
+import { sendPurchaseEmails } from "@/lib/mail";
 import { getStripe } from "@/lib/stripe";
 import { DISCOUNT_CODE, PLATINUM_FREE_TEE_LABEL } from "@/lib/promotions";
 import type Stripe from "stripe";
@@ -38,8 +39,15 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const metadata = session.metadata ?? {};
+
+    const existing = await getOrderByStripeSessionId(session.id);
+    if (existing) {
+      return NextResponse.json({ received: true, duplicate: true });
+    }
+
     const paid = ((session.amount_total ?? 0) / 100).toFixed(2);
     const notes: string[] = [`Paid $${paid} USD via Stripe.`];
+    const discountCode = metadata.discountCode || DISCOUNT_CODE;
 
     if (metadata.discountCode) {
       notes.push(`Discount code: ${metadata.discountCode}.`);
@@ -47,20 +55,26 @@ export async function POST(req: NextRequest) {
       notes.push(`Discount code: ${DISCOUNT_CODE} (auto-applied).`);
     }
 
-    if (metadata.freeTeeIncluded === "true") {
+    const freeTeeIncluded = metadata.freeTeeIncluded === "true";
+    if (freeTeeIncluded) {
       notes.push(`${PLATINUM_FREE_TEE_LABEL} included with Platinum purchase.`);
     }
+
+    const customerName =
+      metadata.customerName || session.customer_details?.name || "Customer";
+    const customerEmail =
+      session.customer_details?.email ||
+      session.customer_email ||
+      metadata.customerEmail ||
+      "";
+    const customerPhone = metadata.customerPhone || "";
 
     await createOrder({
       id: randomUUID(),
       type: "package_purchase",
-      name: metadata.customerName || session.customer_details?.name || "Customer",
-      email:
-        session.customer_details?.email ||
-        session.customer_email ||
-        metadata.customerEmail ||
-        "",
-      phone: metadata.customerPhone || "",
+      name: customerName,
+      email: customerEmail,
+      phone: customerPhone,
       message: notes.join(" "),
       productId: metadata.planId,
       productName: metadata.planName,
@@ -69,6 +83,18 @@ export async function POST(req: NextRequest) {
       amountTotalCents: session.amount_total ?? undefined,
       status: "new",
       createdAt: new Date().toISOString(),
+    });
+
+    await sendPurchaseEmails({
+      customerName,
+      customerEmail,
+      customerPhone,
+      planName: metadata.planName || "Package",
+      planId: metadata.planId || "",
+      amountTotalUsd: paid,
+      discountCode,
+      freeTeeIncluded,
+      stripeSessionId: session.id,
     });
   }
 
