@@ -41,7 +41,7 @@ const pricing = [
     features: [
       "Full workout programs for advanced results",
       "Meal guidance",
-      "Zoom accountability calls — email art@elitebodyfitnesspros.com for info",
+      "Zoom accountability calls and guidance",
       "Weekly coach access",
       "Free workout t-shirt for motivation",
     ],

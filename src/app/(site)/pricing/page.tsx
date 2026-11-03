@@ -91,7 +91,20 @@ export default async function PricingPage({
                     {plan.features.map((f, j) => (
                       <li key={`${plan.id}-${j}`} className="flex gap-2">
                         <span className="text-[var(--neon)]">▸</span>
-                        <span>{f}</span>
+                        {/^zoom accountability calls/i.test(f) ? (
+                          <span>
+                            Zoom accountability calls and guidance
+                            <br />
+                            <a
+                              href="mailto:art@elitebodyfitnesspros.com"
+                              className="text-[var(--neon)] underline-offset-2 hover:underline"
+                            >
+                              (art@elitebodyfitnesspros.com)
+                            </a>
+                          </span>
+                        ) : (
+                          <span>{f}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
