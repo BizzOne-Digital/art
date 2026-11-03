@@ -93,7 +93,7 @@ export default async function PricingPage({
                         <span className="text-[var(--neon)]">▸</span>
                         {/^zoom accountability calls/i.test(f) ? (
                           <span>
-                            Zoom accountability calls and guidance
+                            Zoom accountability calls and guidance nutrition
                             <br />
                             <a
                               href="mailto:art@elitebodyfitnesspros.com"
