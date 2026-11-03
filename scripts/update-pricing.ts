@@ -41,7 +41,7 @@ const pricing = [
     features: [
       "Full workout programs for advanced results",
       "Meal guidance",
-      "Zoom accountability calls and guidance nutrition",
+      "Zoom accountability calls and guidance",
       "Weekly coach access",
       "Free workout t-shirt for motivation",
     ],
