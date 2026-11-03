@@ -28,8 +28,7 @@ export const seedData: SiteData = {
           title: "Unleash The Strongest Version of You",
           subtitle: "Elite Body Fitness Pros",
           body: "At Elite Body Fitness Pros, we deliver personalized, science-based training that fits your schedule and transforms your results.",
-          image:
-            "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80",
+          image: "/hero-gym.jpg",
           ctaText: "Explore Packages",
           ctaLink: "/packages",
         },

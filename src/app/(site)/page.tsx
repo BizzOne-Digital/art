@@ -18,6 +18,7 @@ import {
   getSettings,
   PRODUCT_IMAGE_CLASS,
 } from "@/lib/data";
+import { HOME_HERO_IMAGE } from "@/lib/site-assets";
 
 export const metadata: Metadata = {
   title: "Elite Body Fitness Pros | Home",
@@ -113,8 +114,7 @@ export default async function HomePage() {
         eyebrow={hero?.subtitle}
         title={hero?.title || "Unleash The Strongest Version of You"}
         body={hero?.body}
-        image={hero?.image}
-        video={settings.videoUrl}
+        image={HOME_HERO_IMAGE}
         ctaText={hero?.ctaText || "Explore Packages"}
         ctaLink={hero?.ctaLink || "/packages"}
         externalText={settings.heroExternalLabel || "Visit Our Site"}
