@@ -22,25 +22,39 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(() => !reduce);
   const [leaving, setLeaving] = useState(false);
   const [musicReady, setMusicReadyState] = useState(false);
-  const [videoUnmuted, setVideoUnmuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   function unmuteVideo() {
     const video = videoRef.current;
-    if (!video || videoUnmuted) return;
+    if (!video) return;
     video.muted = false;
-    void video.play();
-    setVideoUnmuted(true);
+    void video.play().catch(() => undefined);
   }
 
   function handleOverlayClick() {
     if (leaving) return;
-    if (!videoUnmuted) {
-      unmuteVideo();
-      return;
-    }
     enter();
   }
+
+  // Try autoplay with sound; if the browser blocks it, fall back to muted
+  // and unmute on the first user interaction.
+  useEffect(() => {
+    if (!mounted || reduce || !show) return;
+    const video = videoRef.current;
+    if (!video) return;
+    const events = ["pointerdown", "keydown", "touchstart", "wheel"];
+    const onGesture = () => {
+      unmuteVideo();
+      events.forEach((ev) => window.removeEventListener(ev, onGesture));
+    };
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true;
+      void video.play().catch(() => undefined);
+      events.forEach((ev) => window.addEventListener(ev, onGesture));
+    });
+    return () => events.forEach((ev) => window.removeEventListener(ev, onGesture));
+  }, [mounted, reduce, show]);
 
   useEffect(() => {
     if (reduce) return;
@@ -51,6 +65,12 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
     if (leaving) return;
 
     playMusicFromGesture();
+
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.muted = true;
+    }
 
     setLeaving(true);
     window.setTimeout(() => {
@@ -117,32 +137,17 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             <div className="grid w-full flex-1 gap-4 md:grid-cols-2 md:gap-6 md:items-start">
               <div
                 className="relative flex w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_rgba(0,180,255,0.12)]"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  unmuteVideo();
-                }}
               >
                 <video
                   ref={videoRef}
                   className="aspect-video w-full max-h-[min(42vh,340px)] object-contain bg-black sm:max-h-[min(46vh,380px)] md:max-h-[min(52vh,420px)]"
                   autoPlay
-                  muted
                   loop
                   playsInline
                   preload="auto"
                 >
                   <source src={INTRO_PROMO_VIDEO} type="video/mp4" />
                 </video>
-                {!videoUnmuted && (
-                  <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-3"
-                    aria-hidden
-                  >
-                    <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-xs">
-                      Tap video for sound
-                    </span>
-                  </div>
-                )}
               </div>
 
               <div
@@ -178,15 +183,6 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
               </div>
             </div>
 
-            {!videoUnmuted && (
-              <p
-                className="pointer-events-none mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 sm:hidden"
-                aria-hidden
-              >
-                Tap video for sound
-              </p>
-            )}
-
             <motion.p
               className="mt-4 w-full shrink-0 pb-2 text-center text-xs font-semibold uppercase tracking-[0.28em] text-white/90 sm:mt-6 sm:text-sm"
               initial={{ opacity: 0 }}
@@ -195,9 +191,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
             >
               {!musicReady && !isMusicReady()
                 ? "Loading music…"
-                : videoUnmuted
-                  ? "Tap to enter"
-                  : "Tap for sound"}
+                : "Tap to enter"}
             </motion.p>
           </motion.div>
         </motion.div>
