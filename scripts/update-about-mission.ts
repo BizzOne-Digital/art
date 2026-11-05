@@ -21,15 +21,15 @@ async function main() {
   mission.title = "Our Mission";
   mission.subtitle = "Mission Statement";
   mission.body = missionBody;
-  if (!mission.image) {
+  if (!mission.image || mission.image.includes("1599058945522")) {
     mission.image =
-      "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80";
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80";
   }
 
   const approach = page.sections.find((s) => s.key === "approach");
-  if (approach && !approach.image) {
+  if (approach && (!approach.image || approach.image.includes("1574680096145"))) {
     approach.image =
-      "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80";
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80";
   }
 
   const hero = page.sections.find((s) => s.key === "hero");

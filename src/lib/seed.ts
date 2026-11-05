@@ -66,7 +66,7 @@ export const seedData: SiteData = {
           subtitle: "The Process",
           body: "At Elite Body Fitness Pros, we follow a clear path designed for momentum — program, train, and transform with coaching at every step.",
           image:
-            "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
+            "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
         },
         {
           id: "home-cta",
@@ -100,7 +100,7 @@ export const seedData: SiteData = {
           subtitle: "Mission Statement",
           body: "We believe fitness should fit your life — not the other way around. That's why we built Elite Body Fitness Pros, a choice of fitness apps designed to meet you wherever you are, whether that's a packed gym, a quiet living room, or the middle of a busy travel schedule.\n\nWe're not here to sell you a one-size-fits-all program. We're here to give you tools that adapt — smart tracking, personalized plans, and real support — so consistency feels achievable, not exhausting. So you can “Unleash the strongest version of you”.",
           image:
-            "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
+            "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
         },
         {
           id: "about-approach",
@@ -108,7 +108,7 @@ export const seedData: SiteData = {
           title: "What We Stand For",
           body: "We believe real transformation happens with our expert training instructional apps. That's why we combine proven training methods with a culture of self belief, ensuring no one on their fitness journey ever feels like they're doing it alone. Elite Body Fitness Pros is a movement toward becoming your strongest and most self confident.",
           image:
-            "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80",
+            "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
         },
       ],
     },

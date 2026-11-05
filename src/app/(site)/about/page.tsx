@@ -10,9 +10,9 @@ const ABOUT_IMAGES = {
   hero:
     "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1600&q=80",
   mission:
-    "https://images.unsplash.com/photo-1599058945522-28d584b6f14f?w=1200&q=80",
+    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80",
   approach:
-    "https://images.unsplash.com/photo-1574680096145-d05b974e3047?w=1200&q=80",
+    "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
 } as const;
 
 export const metadata: Metadata = {
@@ -28,8 +28,14 @@ export default async function AboutPage() {
   const approach = page?.sections.find((s) => s.key === "approach");
 
   const heroImage = hero?.image || ABOUT_IMAGES.hero;
-  const missionImage = mission?.image || ABOUT_IMAGES.mission;
-  const approachImage = approach?.image || ABOUT_IMAGES.approach;
+  const missionImage =
+    mission?.image && !mission.image.includes("1599058945522")
+      ? mission.image
+      : ABOUT_IMAGES.mission;
+  const approachImage =
+    approach?.image && !approach.image.includes("1574680096145")
+      ? approach.image
+      : ABOUT_IMAGES.approach;
   const missionTitle = mission?.title || "Our Mission";
   const approachTitle = approach?.title || "What We Stand For";
 
