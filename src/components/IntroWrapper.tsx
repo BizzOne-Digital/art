@@ -10,7 +10,7 @@ import {
   registerMusicReady,
 } from "@/lib/music-events";
 
-const INTRO_PROMO_VIDEO = "/intro-promo.mp4";
+const INTRO_PROMO_VIDEO = "/paste_e3c27a16-f1dc-4bc5-8609-4cf50608b7cc.mp4";
 
 export function IntroWrapper({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
