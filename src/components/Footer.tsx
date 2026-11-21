@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { accountDeletionVisible } from "@/lib/account-deletion";
 import { SITE_BRAND_TAGLINE, SiteBrand } from "@/components/SiteBrand";
 
 export function Footer() {
@@ -56,6 +57,14 @@ export function Footer() {
             >
               App Privacy Policy
             </Link>
+            {accountDeletionVisible && (
+              <Link
+                href="/app-account-deletion"
+                className="hover:text-[var(--neon)]"
+              >
+                Delete Your Account
+              </Link>
+            )}
             <Link href="/admin" className="hover:text-[var(--neon)]">
               Admin
             </Link>

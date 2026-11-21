@@ -22,7 +22,9 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   );
   const pathname = usePathname();
   // Legal pages must be readable immediately, without the intro overlay.
-  const skipIntro = pathname === "/app-privacy-policy";
+  const skipIntro =
+    pathname === "/app-privacy-policy" ||
+    pathname === "/app-account-deletion";
   const [show, setShow] = useState(() => !reduce);
   const [leaving, setLeaving] = useState(false);
   const [musicReady, setMusicReadyState] = useState(false);

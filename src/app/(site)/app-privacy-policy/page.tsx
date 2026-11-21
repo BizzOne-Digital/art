@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  accountDeletionConfig,
+  accountDeletionReady,
+  accountDeletionVisible,
+  DELETION_EMAIL_SUBJECT,
+} from "@/lib/account-deletion";
 
 export const metadata: Metadata = {
   title: "App Privacy Policy",
@@ -110,6 +117,53 @@ export default function AppPrivacyPolicyPage() {
           We will respond to verified privacy requests as required by
           applicable law.
         </p>
+
+        {accountDeletionVisible && (
+          <>
+        {!accountDeletionReady && (
+          <p className="mt-10 rounded border border-yellow-500/50 bg-yellow-500/10 p-3 text-sm text-yellow-300">
+            Draft for review &mdash; not final. The section below is a proposed
+            update and is pending owner approval.
+          </p>
+        )}
+        <h2 className={h2}>Account and Data Deletion</h2>
+        <p className={p}>
+          You can delete your Elite Body Fitness Pros app account from the
+          app (Profile, then &quot;Delete account&quot;). Deletion removes your
+          account details, uploaded files, purchased program access and
+          incomplete payment attempts. We keep a payment record for each
+          completed purchase with the link to your name, email and device
+          removed. Stripe, database backups, server logs and our
+          purchase-notice mailbox may keep copies and are not automatically
+          erased by account deletion.
+        </p>
+        <p className={p}>
+          If you cannot open the app, you can request deletion by email.
+          Write to{" "}
+          <a
+            href={`mailto:${accountDeletionConfig.supportEmail}?subject=${encodeURIComponent(DELETION_EMAIL_SUBJECT)}`}
+            className="break-all text-[var(--neon)] underline"
+          >
+            {accountDeletionConfig.supportEmail}
+          </a>{" "}
+          from the email address registered to your app account, with the
+          subject &quot;{DELETION_EMAIL_SUBJECT}&quot;. Our administrative
+          team will respond within {accountDeletionConfig.responseTime}. This
+          is a response time, not a deadline for completing deletion. Never
+          send your password or payment card details by email.
+        </p>
+        <p className={p}>
+          Full details on what is deleted and what is kept are on our{" "}
+          <Link
+            href="/app-account-deletion"
+            className="text-[var(--neon)] underline"
+          >
+            account deletion page
+          </Link>
+          .
+        </p>
+          </>
+        )}
 
         <h2 className={h2}>Children&apos;s Privacy</h2>
         <p className={p}>
