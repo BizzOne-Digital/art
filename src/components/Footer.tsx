@@ -50,6 +50,12 @@ export function Footer() {
             <Link href="/contact" className="hover:text-[var(--neon)]">
               Contact Form
             </Link>
+            <Link
+              href="/app-privacy-policy"
+              className="hover:text-[var(--neon)]"
+            >
+              App Privacy Policy
+            </Link>
             <Link href="/admin" className="hover:text-[var(--neon)]">
               Admin
             </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { SiteBrand } from "@/components/SiteBrand";
 import { introFitnessFacts } from "@/lib/intro-facts";
@@ -19,6 +20,9 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
     () => true,
     () => false
   );
+  const pathname = usePathname();
+  // Legal pages must be readable immediately, without the intro overlay.
+  const skipIntro = pathname === "/app-privacy-policy";
   const [show, setShow] = useState(() => !reduce);
   const [leaving, setLeaving] = useState(false);
   const [musicReady, setMusicReadyState] = useState(false);
@@ -84,7 +88,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    if (!mounted || reduce || !show) return;
+    if (!mounted || reduce || !show || skipIntro) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -103,7 +107,7 @@ export function IntroWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
-      {show && (
+      {show && !skipIntro && (
         <motion.div
           role="button"
           tabIndex={0}
