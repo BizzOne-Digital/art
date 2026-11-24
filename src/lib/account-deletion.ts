@@ -11,8 +11,15 @@ export const accountDeletionConfig = {
    * Handled by the administrative department.
    */
   responseTime: "5 to 7 business days" as string | null,
-  /** How long completed-purchase payment records are kept. NOT confirmed. */
-  paymentRecordRetention: null as string | null,
+  /**
+   * Owner-confirmed (client email, 2026-11-24): payment records are kept for 1 year,
+   * in case a customer needs them for tax purposes. No automatic deletion exists
+   * today, so the wording says so. Update it if automatic deletion is built.
+   */
+  paymentRecordRetention:
+    "We keep payment records for 1 year, in case they are needed for tax purposes. They are not deleted automatically at the end of that period." as
+      | string
+      | null,
   /** How long the business keeps "new purchase" notices in its mailbox. NOT confirmed. */
   purchaseNoticeRetention: null as string | null,
   /**
